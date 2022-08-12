@@ -1,21 +1,51 @@
-const defaultResult = 0;
+const defaultResult = parseInt(0);
 let currentResult = defaultResult;
 
 function getUserNumber() {
   return parseInt(userInput.value);
 }
 
+function createAndWriteOutput(operator, initialNum, userNumber) {
+  const calculationDescription = `${initialNum} ${operator} ${userNumber}`;
+  outputResult(currentResult, calculationDescription);
+}
+
 function add(){
   const userNum = getUserNumber();
-  let calculationDescription = `${currentResult} + ${userNum}`;
+  const initialResult = currentResult;
   currentResult = currentResult + userNum;
- 
-  outputResult(currentResult, calculationDescription);
+  createAndWriteOutput('+', initialResult, userNum);
+}
+
+function subtract() {
+  const userNum = getUserNumber();
+  const initialResult = currentResult;
+  currentResult = currentResult - userNum;
+  createAndWriteOutput('-', initialResult, userNum);
+}
+
+function multiply() {
+  const userNum = getUserNumber();
+  const initialResult = currentResult;
+  currentResult = currentResult * userNum;
+  createAndWriteOutput('*', initialResult, userNum);
+}
+
+function divide() {
+  const userNum = getUserNumber();
+  const initialResult = currentResult;
+  currentResult = currentResult / userNum;
+  createAndWriteOutput('/', initialResult, userNum);
 }
 
 
 
+
+
 addBtn.addEventListener('click', add);
+subtractBtn.addEventListener('click', subtract);
+multiplyBtn.addEventListener('click', multiply);
+divideBtn.addEventListener('click', divide);
 
 
 
