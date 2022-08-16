@@ -210,7 +210,41 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-    console.log(gameLog);
+    // console.log(gameLog);
+
+    // for (let i = 0; i < gameLog.length; i++) {
+    //     console.log(gameLog[i]);
+        
+    // }
+
+    // for (const log of gameLog) {
+    //     console.log(log);
+    // }
+
+    const users = [
+        {
+           name: 'Anna', 
+           age: 22 
+        },
+        {
+           name: 'Petar',
+           age: 34
+        },
+        {
+           name: 'Mimi',
+           age: 44
+        }
+    ];
+
+for (const user of users) {
+
+    for (const key in user) {
+        
+        console.log(user['name']);
+    }
+   
+}
+
   }
 
 attackBtn.addEventListener('click', attackHandler);
