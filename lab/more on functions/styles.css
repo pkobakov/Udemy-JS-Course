@@ -1,0 +1,13 @@
+body {
+    padding: 20px;
+    font-family: Helvetica, sans-serif;
+}
+
+button.primary {
+    background-color: rgb(20, 143, 147);
+    color: white;
+    padding: 15px;
+    border-radius: 3px;
+    border: none;
+
+}
