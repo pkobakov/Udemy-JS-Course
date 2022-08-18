@@ -6,5 +6,5 @@ const startGameBtn = document.getElementById('start-game-btn');
 // }
 
 startGameBtn?.addEventListener('click', function(){
-    console.log('Game starting...')
+    console.log('Starting the game...');
 });
