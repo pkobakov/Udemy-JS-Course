@@ -1,12 +1,13 @@
 const startGameBtn = document.getElementById('start-game-btn');
+const result = document.getElementById('result');
 
 const ROCK = 'ROCK';
 const PAPER = 'PAPER';
 const SCISSORS = 'SCISSORS';
 const DEFAULT_PLAYER_CHOICE = ROCK;
-const RESULT_DRAW = 'DRAW';
-const RESULT_PLAYER_WINS = 'PLAYER_WINS';
-const RESULT_COMP_WINS = 'COMPUTER_WINS';
+const RESULT_DRAW = 'IT\'S A DRAW';
+const RESULT_PLAYER_WINS = 'THE PLAYER WINS';
+const RESULT_COMP_WINS = 'THE COMPUTER WINS';
 let gameIsRunning = false;
 
 const getPlayerChoice = function(){
@@ -16,14 +17,14 @@ const getPlayerChoice = function(){
   if (selection !== ROCK &&
     selection !== PAPER &&
     selection !== SCISSORS) {
-      alert(`Invalid selection input. We chose ${ROCK} for you`);
-      return DEFAULT_PLAYER_CHOICE;  
+      alert(`Invalid selection input. We chose ${DEFAULT_PLAYER_CHOICE} for you`);
+      return; 
     }
 
     return selection;
 };
 
-const getTheWinner = function(pChoice, cChoice) {
+const getTheWinner = (pChoice, cChoice) => {
     if (pChoice === cChoice) {
         return RESULT_DRAW;
     } else if (pChoice === ROCK && cChoice === PAPER || 
@@ -61,7 +62,26 @@ startGameBtn.addEventListener('click', function(){
     console.log('Starting the game...'); 
     const playerSelection = getPlayerChoice();
     const computerSelection = computerChoice();
-    const winner = getTheWinner(playerSelection, computerSelection);
+    let winner;
+
+    if (playerSelection) {
+        winner = getTheWinner(playerSelection, computerSelection);
+    } else {
+        winner = getTheWinner(computerSelection);
+    }
+
+    let message = `You picked ${playerSelection}, computer picked ${computerSelection} and you `;
+
+    if (winner === RESULT_DRAW) {
+        message = message + 'had a draw.';
+    } else if (winner === RESULT_PLAYER_WINS) {
+        message = message + 'won.';
+    } else {
+        message = message + 'lost.';
+    }
+
 
     console.log(winner);
+    alert(message);
+    result.innerHTML = winner;
 });
