@@ -24,7 +24,7 @@ const getPlayerChoice = function(){
     return selection;
 };
 
-const getTheWinner = (pChoice, cChoice) => {
+const getTheWinner = (pChoice, cChoice = DEFAULT_PLAYER_CHOICE) => {
     if (pChoice === cChoice) {
         return RESULT_DRAW;
     } else if (pChoice === ROCK && cChoice === PAPER || 
@@ -53,7 +53,7 @@ const computerChoice = function(){
 
 
 
-startGameBtn.addEventListener('click', function(){
+startGameBtn.addEventListener('click', () => {
     if (gameIsRunning) {
         return;
     }
@@ -70,7 +70,7 @@ startGameBtn.addEventListener('click', function(){
         winner = getTheWinner(computerSelection);
     }
 
-    let message = `You picked ${playerSelection}, computer picked ${computerSelection} and you `;
+    let message = `You picked ${playerSelection || DEFAULT_PLAYER_CHOICE}, computer picked ${computerSelection} and you `;
 
     if (winner === RESULT_DRAW) {
         message = message + 'had a draw.';
@@ -85,3 +85,17 @@ startGameBtn.addEventListener('click', function(){
     alert(message);
     result.innerHTML = winner;
 });
+
+//not related to the Game:
+
+const sumUP = (...numbers) => {
+    let sum = 0;
+    for (const num of numbers) {
+        sum+=num;
+    }
+
+    return sum;
+}
+
+console.log(sumUP(2, 4, 4));
+
