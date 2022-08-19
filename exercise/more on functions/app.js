@@ -88,7 +88,7 @@ startGameBtn.addEventListener('click', () => {
 
 //not related to the Game:
 
-const sumUP = (...numbers) => {
+const sumUp = (resultHandler, ...numbers) => {
     const validateNumber = (number) => {
         return isNaN(number)? 0 : number;
     };
@@ -96,12 +96,16 @@ const sumUP = (...numbers) => {
     let sum = 0;
 
     for (const num of numbers) {
-        
+
         sum+= validateNumber(num);
     }
 
-    return sum;
-}
+    return resultHandler(sum);
+};
 
-console.log(sumUP(2, 4, 4));
+const showResult = (result) => {
+  alert('The result after getting all numbers is ' + result);
+};
+
+sumUp(showResult, 2, 4, 4);
 
