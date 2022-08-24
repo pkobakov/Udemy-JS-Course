@@ -1,6 +1,6 @@
 const numbers = [-11,2,100,3,4,5,6,7];
 
-//Part One.
+//Task One.
 
 //Filter...
 // const filteredNumers = numbers.filter(number => number > 5); 
@@ -15,7 +15,7 @@ const numbers = [-11,2,100,3,4,5,6,7];
 // console.log(multiplication);
 
 
-//Part Two.
+//Task Two.
 
 // function findMax(...nums) {
 //   let currentMax = numbers[0];
@@ -31,26 +31,40 @@ const numbers = [-11,2,100,3,4,5,6,7];
 
 // console.log(findMax(...numbers));
 
-//Part Three. 
+//Task Three. 
 
-function findMinMax(...nums) {
-  let maxNum = nums[0];
-  let minNum = nums[0];
+// function findMinMax(...nums) {
+//   let maxNum = nums[0];
+//   let minNum = nums[0];
 
-  for (const num of nums) {
-    if (maxNum < num) {
-        maxNum = num;
-    } 
+//   for (const num of nums) {
+//     if (maxNum < num) {
+//         maxNum = num;
+//     } 
     
-    if (minNum > num) {
-        minNum = num;
-    } 
-  }
+//     if (minNum > num) {
+//         minNum = num;
+//     } 
+//   }
 
-  return [minNum,maxNum];
+//   return [minNum,maxNum];
+// }
+
+// const [min, max] = findMinMax(...numbers);
+ 
+// console.log(min, max);
+
+
+//Task Four.
+
+const uniqueNumbers = new Set ();
+const numbersArray = [1,2,3,3,5,6,7,7,8];
+
+for (const num of numbersArray) {
+    uniqueNumbers.add(num);
 }
 
-const [min, max] = findMinMax(...numbers);
- 
-console.log(min, max);
+console.log(uniqueNumbers);
+
+
 
