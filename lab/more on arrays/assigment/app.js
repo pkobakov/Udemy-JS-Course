@@ -1,4 +1,4 @@
-const numbers = [1,2,100,3,4,5,6,7];
+const numbers = [-11,2,100,3,4,5,6,7];
 
 //Part One.
 
@@ -17,16 +17,40 @@ const numbers = [1,2,100,3,4,5,6,7];
 
 //Part Two.
 
-function findMax(...nums) {
-  let currentMax = numbers[0];
+// function findMax(...nums) {
+//   let currentMax = numbers[0];
 
-  for (const currentNum of nums) {
-    if (currentNum > currentMax) {
-        currentMax = currentNum;
-    }    
+//   for (const currentNum of nums) {
+//     if (currentNum > currentMax) {
+//         currentMax = currentNum;
+//     }    
+//   }
+
+//   return currentMax;
+// }
+
+// console.log(findMax(...numbers));
+
+//Part Three. 
+
+function findMinMax(...nums) {
+  let maxNum = nums[0];
+  let minNum = nums[0];
+
+  for (const num of nums) {
+    if (maxNum < num) {
+        maxNum = num;
+    } 
+    
+    if (minNum > num) {
+        minNum = num;
+    } 
   }
 
-  return currentMax;
+  return [minNum,maxNum];
 }
 
-console.log(findMax(...numbers));
+const [min, max] = findMinMax(...numbers);
+ 
+console.log(min, max);
+
