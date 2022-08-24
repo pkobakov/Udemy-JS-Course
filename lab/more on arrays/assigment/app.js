@@ -55,16 +55,16 @@ const numbers = [-11,2,100,3,4,5,6,7];
 // console.log(min, max);
 
 
-//Task Four.
+// //Task Four.
 
-const uniqueNumbers = new Set ();
-const numbersArray = [1,2,3,3,5,6,7,7,8];
+// const uniqueNumbers = new Set ();
+// const numbersArray = [1,2,3,3,5,6,7,7,8];
 
-for (const num of numbersArray) {
-    uniqueNumbers.add(num);
-}
+// for (const num of numbersArray) {
+//     uniqueNumbers.add(num);
+// }
 
-console.log(uniqueNumbers);
+// console.log(uniqueNumbers);
 
 
 
