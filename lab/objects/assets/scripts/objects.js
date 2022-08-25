@@ -1,32 +1,56 @@
-const anotherName = 'Alex';
+const addMovieButton = document.getElementById('add-movie-btn');
+const searchMovieButton = document.getElementById('search-btn');
+const movies = [];
 
-const person = {
-    'first name': 'Petar',
-    // name: 'Petar',
-    [anotherName]: 'Lilly',
-    age: 47,
-    hobbies: ['Sports', 'Cooking'],
-    4.7 : 'hello',
-    greet: () => alert('Hi there!')
+
+const renderMovies = () => {     
+        
+    const moviesList = document.getElementById('movie-list');
+   
+
+    if (movies.length === 0) {
+        moviesList.classList.remove('visible');
+        return;
+    } else {
+        moviesList.classList.add('visible');
+    }
+
+    moviesList.innerHTML = '';
+
+    movies.forEach((movie) => {
+        const movieElement = document.createElement('li');
+        movieElement.textContent = movie.info.title;
+        moviesList.append(movieElement);
+    });
+
+  
 };
 
-// Add new property:
 
-person.isAdmin = true;
+const addMovieHandler = () => {
+    const title = document.getElementById('title').value;
+    const extraName = document.getElementById('extra-name').value;
+    const extraValue = document.getElementById('extra-value').value;
 
-// Modify property:
+    if (title.trim() === '' ||
+        extraName.trim() === '' ||
+        extraValue.trim() === '') {
+        
+            return ;
+    }
 
-person.age = 43;
+    const newMovie = {
+        
+     info: {
+             title,
+             [extraName]:extraValue
+            },
+      id: Math.random()      
+    };
 
-// Delete Property
+    movies.push(newMovie);
+    console.log(newMovie);
+    renderMovies();
+};
 
-delete person.age;
-
-// Using [] to access property:
-
-const firstName = 'first name';
-
-console.log(`First name string property: ${person['first name']}`);
-console.log(`First name dynamic access: ${person[firstName]}`);
-console.log(person[anotherName]);
-console.log(person[4.7]);
+document.addEventListener('click', addMovieHandler);
