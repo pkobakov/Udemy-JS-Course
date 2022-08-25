@@ -1,7 +1,9 @@
 const person = {
-    name: 'Petar',
+    'first name': 'Petar',
+    // name: 'Petar',
     age: 47,
     hobbies: ['Sports', 'Cooking'],
+    4.7 : 'hello',
     greet: () => alert('Hi there!')
 };
 
@@ -17,5 +19,10 @@ person.age = 43;
 
 delete person.age;
 
+// Using [] to access property:
 
-console.log(person);
+const firstName = 'first name';
+
+console.log(`First name string property: ${person['first name']}`);
+console.log(`First name dynamic access: ${person[firstName]}`);
+console.log(person[4.7]);
