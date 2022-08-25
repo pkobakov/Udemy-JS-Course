@@ -5,4 +5,17 @@ const person = {
     greet: () => alert('Hi there!')
 };
 
-person.greet();
+// Add new property:
+
+person.isAdmin = true;
+
+// Modify property:
+
+person.age = 43;
+
+// Delete Property
+
+delete person.age;
+
+
+console.log(person);
