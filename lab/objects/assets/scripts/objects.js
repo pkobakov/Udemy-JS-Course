@@ -22,29 +22,35 @@ const renderMovies = (filter = '') => {
     
     filteredMovies.forEach( movie => {
         const movieElement = document.createElement('li');
-        let text = movie.info.title + ' - ';
+        const {info, ...otherProps} = movie;
+        // const {title: movieTitle} = info;
 
-        for(const key in movie.info){
+        let {getFormattedTitle} = movie;
+        getFormattedTitle = getFormattedTitle.bind(movie);
+        let text = movie.getFormattedTitle() + ' - ';
+        
+        for(const key in info){
           if(key !== 'title') {
-            text = text + `${key}: ${movie.info[key]}`;
+            text = text + `${key}: ${info[key]}`;
           } 
         }
         movieElement.textContent = text;
+        console.log(otherProps);  
         moviesList.append(movieElement);
     });
+   
 
-  
 };
-
+ 
 
 const addMovieHandler = () => {
     const title = document.getElementById('title').value;
     const extraName = document.getElementById('extra-name').value;
     const extraValue = document.getElementById('extra-value').value;
 
-    if (title.trim() === '' ||
-        extraName.trim() === '' ||
-        extraValue.trim() === '') {
+    if (title === null | undefined ||
+        extraName === null | undefined ||
+        extraValue === null | undefined) {
         
             return ;
     }
@@ -55,7 +61,10 @@ const addMovieHandler = () => {
              title,
              [extraName]:extraValue
             },
-      id: Math.random()      
+      id: Math.random(),
+      getFormattedTitle() {
+        return this.info.title.toUpperCase();
+      }      
     };
 
     movies.push(newMovie);
