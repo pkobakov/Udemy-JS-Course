@@ -1,17 +1,34 @@
-const productList = {
-    products: [{
-        title: 'Bread', 
-        imageUrl: 'https://www.kingarthurbaking.com/sites/default/files/2020-02/the-easiest-loaf-of-bread-youll-ever-bake.jpg',
-        price: 2.56,
-        description: 'Fresh tasty bread'
-    }, 
+class Product {
+    title = 'DEFAULT';
+    imageUrl;
+    description;
+    price;
 
-    {
-        title: 'Mozarella', 
-        imageUrl: 'https://cdn.shopify.com/s/files/1/2836/2982/products/mozzarella-cheese-recipe_grande.jpg',
-        price: 3.28,
-        description: 'Lovely Italian cheese'
-    }], 
+    constructor(title, imageUrl, description, price){
+
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.description = description;
+        this.price = price;
+    }
+}
+
+const productList = {
+    products: [
+        new Product
+        (
+        'Bread', 
+        'https://www.kingarthurbaking.com/sites/default/files/2020-02/the-easiest-loaf-of-bread-youll-ever-bake.jpg',
+        2.56,
+        'Fresh tasty bread')
+    , 
+       new Product
+    (
+        'Mozarella', 
+        'https://cdn.shopify.com/s/files/1/2836/2982/products/mozzarella-cheese-recipe_grande.jpg',
+        3.28,
+        'Lovely Italian cheese'
+    )], 
 
     renderProducts() {
         const renderHook = document.getElementById('app');
