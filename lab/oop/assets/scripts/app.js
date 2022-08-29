@@ -14,6 +14,12 @@ class ProductItem {
       this.product = product;
     }
 
+    addToCard() {
+
+        console.log('Adding Product to card...');
+        console.log(this.product);
+    } 
+
     render() {
         const productEl = document.createElement('li');
         productEl.className = 'product-item';
@@ -28,6 +34,8 @@ class ProductItem {
            </div>
         </div>`;
 
+        const addCartButton = productEl.querySelector('button');
+        addCartButton.addEventListener('click', this.addToCard.bind(this));
         return productEl;
     }
 } 
