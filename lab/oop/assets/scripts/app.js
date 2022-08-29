@@ -1,10 +1,6 @@
 class Product {
-    title = 'DEFAULT';
-    imageUrl;
-    description;
-    price;
 
-    constructor(title, imageUrl, description, price){
+    constructor(title, imageUrl, price, description){
 
         this.title = title;
         this.imageUrl = imageUrl;
@@ -13,8 +9,33 @@ class Product {
     }
 }
 
-const productList = {
-    products: [
+class ProductItem {
+    constructor(product) {
+      this.product = product;
+    }
+
+    render() {
+        const productEl = document.createElement('li');
+        productEl.className = 'product-item';
+        productEl.innerHTML = `
+        <div>
+           <img src="${this.product.imageUrl}" alt="${this.product.title}"/>
+           <div class="product-item__content">
+             <h2>${this.product.title}</h2>
+             <h3>${this.product.price} \$</h3>
+             <p>${this.product.description}</p>
+             <button>Add to Card</botton>
+           </div>
+        </div>`;
+
+        return productEl;
+    }
+} 
+
+
+
+class ProductList {
+    products = [
         new Product
         (
         'Bread', 
@@ -28,33 +49,26 @@ const productList = {
         'https://cdn.shopify.com/s/files/1/2836/2982/products/mozzarella-cheese-recipe_grande.jpg',
         3.28,
         'Lovely Italian cheese'
-    )], 
+    )
+   ];
+    constructor(){}
 
-    renderProducts() {
+    render() {
         const renderHook = document.getElementById('app');
         const prodList = document.createElement('ul');
         prodList.className = 'product-list';
 
         for (const product of this.products) {
-            const productEl = document.createElement('li');
-            productEl.className = 'product-item';
-            productEl.innerHTML = `
-            <div>
-               <img src="${product.imageUrl}" alt="${product.title}"/>
-               <div class="product-item__content">
-                 <h2>${product.title}</h2>
-                 <h3>${product.price} \$</h3>
-                 <p>${product.description}</p>
-                 <button>Add to Card</botton>
-               </div>
-            </div>`
+
+            const productItem = new ProductItem(product);
+            const productEl = productItem.render();
+        
             prodList.append(productEl);
-        }
-        renderHook.append(prodList);
     }
-};
 
-productList.renderProducts();
+    renderHook.append(prodList);
+  }
+}
 
-
-
+const prodList = new ProductList();
+prodList.render();
