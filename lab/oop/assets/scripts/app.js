@@ -12,13 +12,20 @@ class Product {
 class ShoppingCart {
     items = [];
 
+    addProduct(product) {
+        this.items.push(product);
+        this.totalOutput.innerHTML = `<h2>Total: ${1} \$</h2>`;
+
+    }
+
     render() {
         const cartEl = document.createElement('section');
         cartEl.innerHTML = `
-        <h2>Total: \$${0}</h2>
+        <h2>Total: ${0} \$</h2>
         <button>Order Now</h2>`;
         
         cartEl.className = 'cart';
+        this.totalOutput = cartEl.querySelector('h2');
         return cartEl;
     }
 
@@ -29,10 +36,10 @@ class ProductItem {
       this.product = product;
     }
 
-    addToCard() {
+    addToCart() {
 
-        console.log('Adding Product to card...');
-        console.log(this.product);
+        App.addProductToCart(this.product);
+
     } 
 
     render() {
@@ -50,7 +57,7 @@ class ProductItem {
         </div>`;
 
         const addCartButton = productEl.querySelector('button');
-        addCartButton.addEventListener('click', this.addToCard.bind(this));
+        addCartButton.addEventListener('click', this.addToCart.bind(this));
         return productEl;
     }
 } 
@@ -94,10 +101,11 @@ class ProductList {
 }
 
 class Shop {
+
     render() {
         const renderHook = document.getElementById('app');
-        const cart = new ShoppingCart();
-        const cartEl = cart.render();
+        this.cart = new ShoppingCart();
+        const cartEl = this.cart.render();
         const prodList = new ProductList();
         const prodListEl = prodList.render();
 
@@ -107,7 +115,20 @@ class Shop {
 
 }
 
-const shop = new Shop();
-shop.render();
+class App {
+    static cart; 
+
+    static init() {
+        const shop = new Shop();
+        shop.render();
+        this.cart = shop.cart;
+    }
+
+    static addProductToCart(product) {
+        this.cart.addProduct(product);
+    }
+}
+
+App.init();
 
 
