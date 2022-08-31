@@ -18,9 +18,14 @@ class ElementAttribute {
 }
 
 class Component {
-    constructor( renderHookId) {
+    constructor( renderHookId, shouldRender = true) {
         this.hookId = renderHookId;
+        if (shouldRender) {
+           this.render();
+        }
     }
+
+  render(){};  
 
   createRootElement(tag, cssClasses, attributes){
     const rootElement = document.createElement(tag);
@@ -83,8 +88,9 @@ class ShoppingCart  extends Component {
 class ProductItem extends Component {
 
     constructor(product, renderHookId) {
-      super(renderHookId);  
+      super(renderHookId, false);  
       this.product = product;
+      this.render();
     }
 
     addToCart() {
@@ -114,44 +120,57 @@ class ProductItem extends Component {
 
 
 class ProductList extends Component {
-    products = [
-        new Product
-        (
-        'Bread', 
-        'https://www.kingarthurbaking.com/sites/default/files/2020-02/the-easiest-loaf-of-bread-youll-ever-bake.jpg',
-        2.56,
-        'Fresh tasty bread')
-    , 
-       new Product
-    (
-        'Mozarella', 
-        'https://cdn.shopify.com/s/files/1/2836/2982/products/mozzarella-cheese-recipe_grande.jpg',
-        3.28,
-        'Lovely Italian cheese'
-    )
-   ];
+    products = [];
     constructor(renderHookId){
         super(renderHookId);
+        this.fetchProducts();
+
+    }
+
+    fetchProducts() {
+        this.products = [new Product
+            (
+            'Bread', 
+            'https://www.kingarthurbaking.com/sites/default/files/2020-02/the-easiest-loaf-of-bread-youll-ever-bake.jpg',
+            2.56,
+            'Fresh tasty bread')
+        , 
+           new Product
+        (
+            'Mozarella', 
+            'https://cdn.shopify.com/s/files/1/2836/2982/products/mozzarella-cheese-recipe_grande.jpg',
+            3.28,
+            'Lovely Italian cheese'
+        )];
+
+        this.renderProducts();
+    }
+
+    renderProducts() {
+        for (const product of this.products) {
+            new ProductItem(product, 'prodList-id');
+    }
     }
 
     render() {
         
         this.createRootElement('ul', 'product-list', 
                                [new ElementAttribute('id', 'prodList-id')]);
-        for (const product of this.products) {
-            const productItem = new ProductItem(product, 'prodList-id');
-            productItem.render();
-    }
+        if (this.products && this.products.length > 0) {
+            this.renderProducts();
+        }                       
+
   }
 }
 
-class Shop {
+class Shop extends Component {
 
+    constructor(){
+        super();
+    }
     render() {
         this.cart = new ShoppingCart('app');
-        this.cart.render();
-        const prodList = new ProductList('app');
-        prodList.render();
+        new ProductList('app');
     };
 
 }
@@ -161,7 +180,6 @@ class App {
 
     static init() {
         const shop = new Shop();
-        shop.render();
         this.cart = shop.cart;
     }
 
