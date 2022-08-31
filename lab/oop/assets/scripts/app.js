@@ -127,15 +127,16 @@ class ProductItem extends Component {
 
 
 class ProductList extends Component {
-    products = [];
+    #products = [];
     constructor(renderHookId){
-        super(renderHookId);
+        super(renderHookId, false);
+        this.render();
         this.fetchProducts();
 
     }
 
     fetchProducts() {
-        this.products = [new Product
+        this.#products = [new Product
             (
             'Bread', 
             'https://www.kingarthurbaking.com/sites/default/files/2020-02/the-easiest-loaf-of-bread-youll-ever-bake.jpg',
@@ -154,7 +155,7 @@ class ProductList extends Component {
     }
 
     renderProducts() {
-        for (const product of this.products) {
+        for (const product of this.#products) {
             new ProductItem(product, 'prodList-id');
     }
     }
@@ -163,7 +164,7 @@ class ProductList extends Component {
         
         this.createRootElement('ul', 'product-list', 
                 [new ElementAttribute('id', 'prodList-id')]);
-        if (this.products && this.products.length > 0) {
+        if (this.#products && this.#products.length > 0) {
             this.renderProducts();
         }                       
 
@@ -177,7 +178,7 @@ class Shop extends Component {
     }
     render() {
         this.cart = new ShoppingCart('app');
-        new ProductList('app');
+        const list = new ProductList('app');
     };
 
 }
