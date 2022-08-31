@@ -62,7 +62,11 @@ class ShoppingCart  extends Component {
 
 
     constructor(renderHookId){
-        super(renderHookId);
+        super(renderHookId, false);
+        this.placeOrder = () => {
+            console.log('Ordering...');
+            console.log(this.items);
+          }
     }
     
 
@@ -79,7 +83,10 @@ class ShoppingCart  extends Component {
         cartEl.innerHTML = `
         <h2>Total: ${0} \$</h2>
         <button>Order Now</h2>`;
-        
+
+
+        const orderButton = document.querySelector('button');
+        orderButton.addEventListener('click',() => this.placeOrder());
         this.totalOutput = cartEl.querySelector('h2');
     }
 
@@ -155,7 +162,7 @@ class ProductList extends Component {
     render() {
         
         this.createRootElement('ul', 'product-list', 
-                               [new ElementAttribute('id', 'prodList-id')]);
+                [new ElementAttribute('id', 'prodList-id')]);
         if (this.products && this.products.length > 0) {
             this.renderProducts();
         }                       
