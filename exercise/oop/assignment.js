@@ -1,12 +1,13 @@
 class Course {
 
+    #_price;
     get price() {
-       return `$ ${this._price}`;
+       return `$ ${this.#_price}`;
     }
 
     set price(value) {
        if (value > 0) {
-        this._price = value;
+        this.#_price = value;
        } else {
         alert('Invalid value');
        }
