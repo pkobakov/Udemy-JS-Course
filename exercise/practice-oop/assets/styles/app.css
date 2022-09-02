@@ -91,6 +91,14 @@ button:active {
   background: white;
 }
 
+.card-small {
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+  background: white;
+}
+
 #active-projects {
   border: 1px solid #870099;
 }
