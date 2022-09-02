@@ -1,24 +1,46 @@
+class DOMHelper {
+    static moveElement(elementId, newDestination) {
+        const element = document.getElementById(elementId);
+        const destinationElement  = document.querySelector(newDestination);
+        destinationElement.append(element);
+    }
+
+    static clearEventListeners (element) {
+        const clonedElement = element.cloneNode(true);
+        element.replaceWith(clonedElement);
+
+        return clonedElement;
+    }
+}
 class Tooltip {
 
 }
 class ProjectItem {
 
-    constructor(id, updateProjectListsFunction)
+    constructor(id, updateProjectListsFunction, type)
     {   
-        this.updateProjectsListsHandler = updateProjectListsFunction;
+        this.type = type;
+        this.updateProjectsListHandler = updateProjectListsFunction;
         this.id = id;
         this.connectMoreInfoButton();
-        this.connectSwitchButton();
+        this.connectSwitchButton(type);
 
     }
 
     connectMoreInfoButton(){};
 
-    connectSwitchButton(){
+    connectSwitchButton(type){
         const projItemElement = document.getElementById(this.id);
-        const switchButton = projItemElement.querySelector('button:last-of-type');
-        switchButton.addEventListener('click', this.updateProjectsListsHandler);
+        let switchButton = projItemElement.querySelector('button:last-of-type');
+        switchButton = DOMHelper.clearEventListeners(switchButton);
+        switchButton.textContent = type === 'active' ? 'Finish' : 'Activate';
+        switchButton.addEventListener('click', this.updateProjectsListHandler.bind(null, this.id));
     };
+
+    update(updateProjectListsFunction, type) {
+       this.updateProjectsListHandler = updateProjectListsFunction;
+       this.connectSwitchButton(type);
+    }
 
 }
 class ProjectList{
@@ -32,7 +54,7 @@ class ProjectList{
         console.log(projItems);
 
         for (const projItem of projItems) {
-        this.projects.push(new ProjectItem(projItem.id, this.switchProj.bind(this)));
+        this.projects.push(new ProjectItem(projItem.id, this.switchProj.bind(this), this.type));
         }
 
         console.log(this.projects)
@@ -42,11 +64,15 @@ class ProjectList{
         this.switchHandler = switchHandlerFunction;
     };
 
-    addProject(){
-        console.log(this);
+    addProject(project){
+        this.projects.push(project);
+        DOMHelper.moveElement(project.id, `#${this.type}-projects ul`);
+        project.update(this.switchProj.bind(this), this.type);
+        
     }
 
     switchProj(projId){
+        console.log(projId);
         this.switchHandler(this.projects.find(p => p.id === projId));
         this.projects = this.projects.filter(p => p.id !== projId);
 
