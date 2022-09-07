@@ -3,6 +3,8 @@ class DOMHelper {
         const element = document.getElementById(elementId);
         const destinationElement  = document.querySelector(newDestination);
         destinationElement.append(element);
+        element.scrollIntoView({behavior: 'smooth'});
+
     }
 
     static clearEventListeners (element) {
