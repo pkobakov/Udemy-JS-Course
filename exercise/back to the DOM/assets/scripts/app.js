@@ -55,7 +55,10 @@ class Tooltip extends Component {
     create() {
         const toolTipElement = document.createElement('div');
         toolTipElement.className = 'card';
-        toolTipElement.textContent = this.text;
+        const tooltipTemplate = document.getElementById('tooltip');
+        const tootipBody = document.importNode(tooltipTemplate.content, true);
+        tootipBody.querySelector('p').textContent = this.text;
+        toolTipElement.append(tootipBody);
 
         const hostElPosLeft = this.hostElement.offsetLeft;
         const hostElPosTop = this.hostElement.offsetTop;
