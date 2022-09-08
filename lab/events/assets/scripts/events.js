@@ -30,6 +30,20 @@ form.addEventListener('submit', event => {
     console.log(event);
 });
 
+//Capturing phases of nested events:
+
+const button = document.querySelector('button');
+button.addEventListener('click', (event) => {
+    console.log('BUTTON CLICKED');
+    console.log(event);
+})
+
+const div = document.querySelector('div');
+div.addEventListener('click', (event) => {
+    console.log('DIV CLICKED');
+    console.log(event)
+},true) //Capturing phase set to true will invoke the div event first;
+
 
 
 
