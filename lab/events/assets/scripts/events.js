@@ -18,11 +18,20 @@ const boundFn = buttonClickHandler.bind(this);
 // setTimeout(() => {button.removeEventListener('click', buttonClickHandler); 
 // }, 2000);
 
-buttons.forEach(btn => {
-    btn.addEventListener('mouseenter', buttonClickHandler);
+// buttons.forEach(btn => {
+//     btn.addEventListener('click', buttonClickHandler);
+// });
+
+// window.addEventListener('scroll', event => {console.log(event)});
+
+const form = document.querySelector('form');
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    console.log(event);
 });
 
-window.addEventListener('scroll', event => {console.log(event)});
+
+
 
 
 
