@@ -46,3 +46,18 @@ input {
   padding: 1rem 2rem;
   border-radius: 10px;
 }
+
+ul {
+  list-style: none;
+}
+
+li {
+  border: 1px solid #575254;
+  padding: 1rem;
+
+}
+
+.highlight {
+  background-color:  red;
+  color: white;
+}
