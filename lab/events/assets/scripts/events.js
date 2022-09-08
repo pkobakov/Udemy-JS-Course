@@ -30,19 +30,27 @@ form.addEventListener('submit', event => {
     console.log(event);
 });
 
-//Capturing phases of nested events:
+//Propagation
 
-const button = document.querySelector('button');
-button.addEventListener('click', (event) => {
+const clickMeButton = document.querySelector('button');
+clickMeButton.addEventListener('click', (event) => {
+    // event.stopPropagation();
     console.log('BUTTON CLICKED');
+    console.log(event);
+});
+
+const clickMeTooButton = document.querySelector('button:last-of-type');
+clickMeTooButton.addEventListener('click', event => {
+    // event.stopImmediatePropagation();
+    console.log('ME TOO BUTTON CLICKED');
     console.log(event);
 })
 
 const div = document.querySelector('div');
 div.addEventListener('click', (event) => {
     console.log('DIV CLICKED');
-    console.log(event)
-},true) //Capturing phase set to true will invoke the div event first;
+    console.log(event);
+}); 
 
 
 
