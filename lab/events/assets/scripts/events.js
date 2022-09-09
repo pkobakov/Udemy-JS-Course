@@ -31,9 +31,11 @@ button.addEventListener('click', event => {
 // window.addEventListener('scroll', event => {console.log(event)});
 
 const form = document.querySelector('form');
-form.addEventListener('submit', event => {
+form.addEventListener('submit', function(event) {
     event.preventDefault();
     console.log(event);
+    console.log(this);
+
 });
 
 //Propagation
@@ -70,8 +72,9 @@ form.addEventListener('submit', event => {
 // Event Delegation Pattern:
 
 const list = document.querySelector('ul');
-list.addEventListener('click', event => {
+list.addEventListener('click', function(event) {
     event.target.closest('li').classList.toggle('highlight');
+    console.log(this);
     button.click();
 });
 
