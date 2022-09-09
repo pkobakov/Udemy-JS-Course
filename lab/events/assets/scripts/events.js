@@ -1,16 +1,22 @@
-const buttons = document.querySelectorAll('button');
+const button = document.querySelector('button');
+button.addEventListener('click', event => {
+ console.log('BUTTON WAS CLICKED');
+ console.log(event);
+});
 
-const buttonClickHandler = event => {
-    // event.target.disabled = true;
-    console.log(event);
-}
+// const buttons = document.querySelectorAll('button');
 
-const anotherButtonClickHandler = () => {
-    console.log('Button was clicked');
-}
-// button.onclick = buttonClickHandler();
+// const buttonClickHandler = event => {
+//     // event.target.disabled = true;
+//     console.log(event);
+// }
 
-const boundFn = buttonClickHandler.bind(this);
+// const anotherButtonClickHandler = () => {
+//     console.log('Button was clicked');
+// }
+// // button.onclick = buttonClickHandler();
+
+// const boundFn = buttonClickHandler.bind(this);
 
 
 // button.addEventListener('click', buttonClickHandler);
@@ -66,6 +72,7 @@ form.addEventListener('submit', event => {
 const list = document.querySelector('ul');
 list.addEventListener('click', event => {
     event.target.closest('li').classList.toggle('highlight');
+    button.click();
 });
 
 
