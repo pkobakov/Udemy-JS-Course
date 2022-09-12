@@ -46,3 +46,17 @@ const calculateIncomeTax = createTaxCalculator(0.25);
 console.log(calculateVAT(100));
 console.log(calculateIncomeTax(100));
 
+//Closures:
+
+ let username = 'Max';
+function greetUser(){
+
+    //let name = 'Anna';
+    console.log('Hi ' + name);
+}
+
+let name = 'Pit'
+username = 'Manuel';
+
+greetUser();
+
