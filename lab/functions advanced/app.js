@@ -60,3 +60,70 @@ username = 'Manuel';
 
 greetUser();
 
+
+//Recursion: 
+
+// function powerOf(x, n) {
+//     let result = 1;
+
+//     for (let index = 0; index < n; index++) {
+//         result*=x;
+        
+//     }
+
+//     return result;
+// } 
+
+function powerOf(x, n) {
+    if (n === 1) {
+        return x;
+    }
+
+   return x * powerOf(x, n-1);
+} 
+
+console.log(powerOf(2, 3));
+
+// Recursion Advanced:
+
+const myself = {
+    name: 'Peter',
+    friends: [
+        {
+            name: 'Manuel',
+            friends: [
+                       { name: 'Emil' }
+                     ]
+        },
+
+        {
+            name: 'Julia',
+            friends: [
+                      { name: 'Koko'},
+                      { name: 'Moni'}
+                    ]
+        }
+    ]
+};
+
+function getFriends(person) {
+
+    const collectedFriends = [];3
+
+if (!person.friends) {
+    return [];
+}
+
+for (const friend of person.friends) {
+    
+    collectedFriends.push(friend.name);
+    collectedFriends.push(...getFriends(friend));
+
+}
+
+    return collectedFriends;
+
+}
+
+console.log(getFriends(myself));
+
