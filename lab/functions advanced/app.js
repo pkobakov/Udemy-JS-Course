@@ -141,13 +141,4 @@ function factorial(n) {
 console.log(factorial(10));
 
 
-function greeting(name) {
-    console.log('Hello from ' + name);
-}
 
-function myName(callback) {
-    let name = 'Petar';
-    callback(name);
-}
-
-myName(greeting);
