@@ -6,13 +6,15 @@
 
 
 function productDescription(strings, name, price) {
-    return `${strings[0]}${name}${strings[1]}${price}`;
+    const tax = 1.2;
+    const totalPrice = (price*tax).toFixed(2);
+    return `${strings[0]}${name}${strings[1]}${totalPrice}${strings[2]}`;
 }
 
 const nameInput = 'JavaScript Complete Guide';
 const priceInput = 29.99;
 
-const courseDescription = productDescription`This course ${nameInput} costs ${priceInput}`;
+const courseDescription = productDescription`This course ${nameInput} costs ${priceInput}$`;
 
 console.log(courseDescription);
 
