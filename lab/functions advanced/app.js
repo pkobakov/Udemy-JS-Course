@@ -108,7 +108,7 @@ const myself = {
 
 function getFriends(person) {
 
-    const collectedFriends = [];3
+    const collectedFriends = [];
 
 if (!person.friends) {
     return [];
@@ -127,3 +127,27 @@ for (const friend of person.friends) {
 
 console.log(getFriends(myself));
 
+
+function factorial(n) {
+
+    if (n === 0) {
+        return 1;
+    }
+
+    return n * factorial(n-1);
+
+}
+
+console.log(factorial(10));
+
+
+function greeting(name) {
+    console.log('Hello from ' + name);
+}
+
+function myName(callback) {
+    let name = 'Petar';
+    callback(name);
+}
+
+myName(greeting);
