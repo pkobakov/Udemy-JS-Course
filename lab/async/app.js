@@ -50,8 +50,7 @@ function trackUserHandler() {
                 return setTimer(3000);
              }).then( () => {
                 console.log('Current Position: ', position);
-  })
-              ;
+  });
 
   setTimer(2000).then(data => {
     console.log(data);
@@ -59,7 +58,7 @@ function trackUserHandler() {
 
   textLocation().then(text => {
     console.log(text);
-  })
+  });
 }
 
 button.addEventListener('click', trackUserHandler);
