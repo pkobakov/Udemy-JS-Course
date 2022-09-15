@@ -1,6 +1,26 @@
 const button = document.querySelector('button');
 const output = document.querySelector('p');
 
+const getPosition = (opts) => {
+  const promise = new Promise ((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(myPosition => {
+      resolve(myPosition);
+    },
+      error => {
+      console.log(error);
+    }
+    );
+  });
+  return promise;
+}
+
+const textLocation = () => { 
+ const promise = new Promise ((resolve, reject) => {
+  resolve('Getting location....');
+  });
+ return promise;
+}
+
 const setTimer = duration => {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -10,23 +30,36 @@ const setTimer = duration => {
   return promise;
 }
 
+const greeting = greet => {
+  const promise = new Promise ((resolve, reject) => {  
+    resolve(greet);
+  });
+  return promise;
+}
+
 function trackUserHandler() {
-  navigator.geolocation.getCurrentPosition(
-    postData => {
-    setTimer(2000).then(data=> {
-      console.log(data, postData);
-    });
-    },
-    error => {
-      console.log(error);
-    }
-  );
+  let position; 
 
-  setTimeout(() => {
-    console.log('Timer done!');
-  }, 0);
+  greeting('Hello from GeoLocation!').then(greet => {
+      console.log(greet);
+  });
 
-  console.log('Getting location...');
+  getPosition()
+               .then( posData => {
+                position = posData; 
+                return setTimer(3000);
+             }).then( () => {
+                console.log('Current Position: ', position);
+  })
+              ;
+
+  setTimer(2000).then(data => {
+    console.log(data);
+  });
+
+  textLocation().then(text => {
+    console.log(text);
+  })
 }
 
 button.addEventListener('click', trackUserHandler);
