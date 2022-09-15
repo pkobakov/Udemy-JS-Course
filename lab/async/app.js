@@ -37,14 +37,17 @@ const greeting = greet => {
   return promise;
 }
 
-function trackUserHandler() {
-  let position; 
+async function trackUserHandler() {
+  // let position; 
 
-  greeting('Hello from GeoLocation!').then(greet => {
-      console.log(greet);
-  });
+  const greetData = await greeting('Hello from GeoLocation!');
+  const posData = await getPosition();
+  const timerData = await setTimer(3000);
+  console.log(greetData);
+  console.log(timerData);
+  console.log(posData); 
 
-  getPosition()
+  // getPosition()
   //              .then( posData => {
   //               position = posData; 
   //               return setTimer(3000);
@@ -54,25 +57,25 @@ function trackUserHandler() {
   //               console.log('Current Position: ', position);
   // });
 
-  .then(posData => {
-    position = posData;
-    return setTimer(3000)
-  }).catch( error => {
-    console.log(error);
-    return 'Try again.'
-  }).then(() => {
-    console.log('Current Position: ', position ? position : 'None');
-  })
+  // .then(posData => {
+  //   position = posData;
+  //   return setTimer(3000)
+  // }).catch( error => {
+  //   console.log(error);
+  //   return 'Try again.'
+  // }).then(() => {
+  //   console.log('Current Position: ', position ? position : 'None');
+  // })
 
 
 
-  setTimer(2000).then(data => {
-    console.log(data);
-  });
+  // setTimer(2000).then(data => {
+  //   console.log(data);
+  // });
 
-  textLocation().then(text => {
-    console.log(text);
-  });
+  // textLocation().then(text => {
+  //   console.log(text);
+  // });
 }
 
 button.addEventListener('click', trackUserHandler);
