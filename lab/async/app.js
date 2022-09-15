@@ -7,7 +7,7 @@ const getPosition = (opts) => {
       resolve(myPosition);
     },
       error => {
-      reject( 'Some error occures');
+      reject( 'Some error occures. Try again.');
     }
     );
   });
@@ -40,9 +40,20 @@ const greeting = greet => {
 async function trackUserHandler() {
   // let position; 
 
-  const greetData = await greeting('Hello from GeoLocation!');
-  const posData = await getPosition();
-  const timerData = await setTimer(3000);
+  let greetData;
+  let posData;
+  let timerData;
+
+  try {
+    greetData = await greeting('Hello from GeoLocation!');
+    timerData = await setTimer(3000);
+    posData = await getPosition();
+  } catch (error) {
+    console.log(error);
+  }
+  
+  
+
   console.log(greetData);
   console.log(timerData);
   console.log(posData); 
@@ -89,3 +100,11 @@ button.addEventListener('click', trackUserHandler);
 // }
 
 // console.log(result);
+
+Promise.race([getPosition(), setTimer(1000)]).then(data => {console.log(data)});
+Promise.all([getPosition(), setTimer(1000)]).then(promiseData => {
+  console.log(promiseData);
+});
+Promise.allSettled([getPosition(), setTimer(1000)]).then(data => {
+  console.log(data);
+})
