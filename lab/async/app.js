@@ -7,7 +7,7 @@ const getPosition = (opts) => {
       resolve(myPosition);
     },
       error => {
-      console.log(error);
+      reject( 'Some error occures');
     }
     );
   });
@@ -45,12 +45,26 @@ function trackUserHandler() {
   });
 
   getPosition()
-               .then( posData => {
-                position = posData; 
-                return setTimer(3000);
-             }).then( () => {
-                console.log('Current Position: ', position);
-  });
+  //              .then( posData => {
+  //               position = posData; 
+  //               return setTimer(3000);
+  //            }, error => {
+  //              console.log(error);
+  //            }).then( () => {
+  //               console.log('Current Position: ', position);
+  // });
+
+  .then(posData => {
+    position = posData;
+    return setTimer(3000)
+  }).catch( error => {
+    console.log(error);
+    return 'Try again.'
+  }).then(() => {
+    console.log('Current Position: ', position ? position : 'None');
+  })
+
+
 
   setTimer(2000).then(data => {
     console.log(data);
