@@ -5,7 +5,7 @@ const postTemplate = document.getElementById('single-post');
 
 
 
-function sendHttpRequest(method, url) {
+function sendHttpRequest(method, url, data) {
 
     const promise = new Promise ((resolve, reject) => {
 
@@ -17,7 +17,7 @@ function sendHttpRequest(method, url) {
             resolve(xhr.response);
             
         }
-        xhr.send();
+        xhr.send( JSON.stringify(data));
     });
     
     return promise;
@@ -38,8 +38,22 @@ async function fetchPosts() {
                 listOfElements.append(postEl);
     }
 }
+
+async function createPost(title, content) {
+    const userId = Math.random();
+
+    const post = {
+        title: title,
+        body: content,
+        userId: userId
+    };
+
+await sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post);
+}
     
 fetchPosts();
+
+createPost('DUMMY', 'Some text here');
  
 
 
