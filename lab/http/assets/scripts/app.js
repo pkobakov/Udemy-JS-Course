@@ -4,7 +4,8 @@ const listOfElements = document.querySelector('.posts');
 const postTemplate = document.getElementById('single-post');
 
 const form = document.querySelector('#new-post form');
-const fetchButton = document.querySelector('#available-posts button'); 
+const fetchButton = document.querySelector('#available-posts button');
+const postsList = document.querySelector('ul'); 
 
 function sendHttpRequest(method, url, data) {
 
@@ -36,6 +37,7 @@ async function fetchPosts() {
                 const postEl = document.importNode(postTemplate.content, true);
                 postEl.querySelector('h2').textContent = post.title.toUpperCase();
                 postEl.querySelector('p').textContent = post.body;
+                postEl.querySelector('li').id = post.id;
                 listOfElements.append(postEl);
     }
 }
@@ -62,7 +64,14 @@ form.addEventListener('submit', event  => {
 });
 
 
-createPost('DUMMY', 'Some text here');
+postsList.addEventListener('click', event => {
+    if(event.target.tagName === 'BUTTON'){
+        
+        const postId = event.target.closest('li').id;
+        console.log(postId);
+        sendHttpRequest('DELETE', `https://jsonplaceholder.typicode.com/posts/${postId}`);
+    }
+});
  
 
 
