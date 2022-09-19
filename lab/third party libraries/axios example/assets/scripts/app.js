@@ -57,10 +57,10 @@ function sendHttpRequest(method, url, data) {
 async function fetchPosts() {
     try{
 
-        const responseData = await sendHttpRequest('GET',
-            'https://jsonplaceholder.typicode.com/posts');
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        console.log(response);
     
-        const listOfPosts = responseData;
+        const listOfPosts = response.data;
                 // const listOfPosts = JSON.parse(xhr.response); - another way to configure the response data from json to js
                 // console.log(listOfPosts);
                 
@@ -73,6 +73,7 @@ async function fetchPosts() {
         }
     } catch(error) {
         alert(error.message);
+        console.log(error.response);
     }
 }
 
@@ -88,7 +89,9 @@ async function createPost(title, content) {
     const formData = new FormData(form);
     formData.append('userId', userId);
 
-    await sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', formData);
+    const postResponse = await axios.post('https://jsonplaceholder.typicode.com/posts', post); // axios will work with formData as well
+    console.log(postResponse);
+
 }
     
 fetchButton.addEventListener('click', fetchPosts);
@@ -106,7 +109,7 @@ postsList.addEventListener('click', event => {
         
         const postId = event.target.closest('li').id;
         console.log(postId);
-        sendHttpRequest('DELETE', `https://jsonplaceholder.typicode.com/posts/${postId}`);
+        axios.delete(`https://jsonplaceholder.typicode.com/posts/${postId}`);
     }
 });
  
