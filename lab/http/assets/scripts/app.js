@@ -9,38 +9,42 @@ const postsList = document.querySelector('ul');
 
 function sendHttpRequest(method, url, data) {
 
-    const promise = new Promise ((resolve, reject) => {
+//     const promise = new Promise ((resolve, reject) => {
 
-        const xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.responseType = 'json';  
+//         const xhr = new XMLHttpRequest();
+//         xhr.open(method, url);
+//         xhr.responseType = 'json';  
             
-        xhr.onload = function () {
+//         xhr.onload = function () {
 
-            if (xhr.status >= 200 && xhr.status < 300) {
-                resolve(xhr.response);
-            } else{
-                reject(new Error('Something went wrong'))
-            }
+//             if (xhr.status >= 200 && xhr.status < 300) {
+//                 resolve(xhr.response);
+//             } else{
+//                 reject(new Error('Something went wrong'))
+//             }
             
-        };
+//         };
 
-        xhr.onerror = () =>{
-           reject(new Error('Failed to send request'));
-        };
+//         xhr.onerror = () =>{
+//            reject(new Error('Failed to send request'));
+//         };
 
-        xhr.send( JSON.stringify(data));
-    });
+//         xhr.send( JSON.stringify(data));
+//     });
     
-    return promise;
-};
+//     return promise;
+// };
+
+    return fetch(url).then(response => {
+    return response.json();
+ });
+}
 
 async function fetchPosts() {
-    try{
+    // try{
 
-        const responseData = await sendHttpRequest(
-            'GET', 
-            'https://jsonplaceholder.typicode.com/post');
+        const responseData = await sendHttpRequest('GET',
+            'https://jsonplaceholder.typicode.com/posts');
     
         const listOfPosts = responseData;
                 // const listOfPosts = JSON.parse(xhr.response); - another way to configure the response data from json to js
@@ -53,9 +57,9 @@ async function fetchPosts() {
                     postEl.querySelector('li').id = post.id;
                     listOfElements.append(postEl);
         }
-    } catch(error) {
-        alert(error.message);
-    }
+    // } catch(error) {
+    //     alert(error.message);
+    // }
 }
 
 async function createPost(title, content) {
@@ -100,5 +104,3 @@ const myObj = {
 const jsonObj = JSON.stringify(myObj);
 console.log(jsonObj);
 console.log(typeof jsonObj);
-
-
