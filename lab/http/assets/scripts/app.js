@@ -43,10 +43,10 @@ function sendHttpRequest(method, url, data) {
         if (response.status >= 200 && response.status <300) {
             return response.json();
         } else {
-            response.json(err => {
+            return response.json().then(err => {
             console.log(err); 
+            throw new Error('Something went wrong - server-side.');   
             });
-          throw new Error('Something went wrong - server-side.');   
         }
  })
  .catch(error => {
