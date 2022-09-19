@@ -37,8 +37,7 @@ function sendHttpRequest(method, url, data) {
 
     return fetch(url, {
         method: method,
-        body: JSON.stringify(data),
-        headers: {'Content-Type': 'application/json'}
+        body: JSON.stringify(data)
     }).then(response => {
         if (response.status >= 200 && response.status <300) {
             return response.json();
@@ -59,7 +58,7 @@ async function fetchPosts() {
     try{
 
         const responseData = await sendHttpRequest('GET',
-            'https://jsonplaceholder.typicode.com/post');
+            'https://jsonplaceholder.typicode.com/posts');
     
         const listOfPosts = responseData;
                 // const listOfPosts = JSON.parse(xhr.response); - another way to configure the response data from json to js
@@ -86,7 +85,10 @@ async function createPost(title, content) {
         userId: userId
     };
 
-    await sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', post);
+    const formData = new FormData(form);
+    formData.append('userId', userId);
+
+    await sendHttpRequest('POST', 'https://jsonplaceholder.typicode.com/posts', formData);
 }
     
 fetchButton.addEventListener('click', fetchPosts);
