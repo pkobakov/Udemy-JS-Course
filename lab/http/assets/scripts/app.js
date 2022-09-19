@@ -37,17 +37,29 @@ function sendHttpRequest(method, url, data) {
 
     return fetch(url, {
         method: method,
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        headers: {'Content-Type': 'application/json'}
     }).then(response => {
-    return response.json();
+        if (response.status >= 200 && response.status <300) {
+            return response.json();
+        } else {
+            response.json(err => {
+            console.log(err); 
+            });
+          throw new Error('Something went wrong - server-side.');   
+        }
+ })
+ .catch(error => {
+    console.log(error);
+    throw new Error('Something went wrong!');
  });
 }
 
 async function fetchPosts() {
-    // try{
+    try{
 
         const responseData = await sendHttpRequest('GET',
-            'https://jsonplaceholder.typicode.com/posts');
+            'https://jsonplaceholder.typicode.com/post');
     
         const listOfPosts = responseData;
                 // const listOfPosts = JSON.parse(xhr.response); - another way to configure the response data from json to js
@@ -60,9 +72,9 @@ async function fetchPosts() {
                     postEl.querySelector('li').id = post.id;
                     listOfElements.append(postEl);
         }
-    // } catch(error) {
-    //     alert(error.message);
-    // }
+    } catch(error) {
+        alert(error.message);
+    }
 }
 
 async function createPost(title, content) {
