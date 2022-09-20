@@ -1,5 +1,8 @@
 import { ProjectList } from "./App/ProjectList.js";
 
+// window.DEFAULT_VALUE = 'This is the window DEFAULT VALUE';
+globalThis.DEFAULT_VALUE = 'This is the globalThis DEFAULT VALUE';
+
 export class App {
   static init() {
     const activeProjectsList = new ProjectList('active');
