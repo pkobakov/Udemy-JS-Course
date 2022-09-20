@@ -1,5 +1,5 @@
-import { ProjectItem as ProjItem } from "./ProjectItem.js";
-import { DOMHelper } from "../Utility/DOMHelper.js";
+import { ProjectItem as ProjItem } from './ProjectItem.js';
+import { DOMHelper } from '../Utility/DOMHelper.js';
 
 
 export class ProjectList {
@@ -7,7 +7,7 @@ export class ProjectList {
   
     constructor(type) {
       this.type = type;
-      const prjItems = document.querySelectorAll(`#${type}-projects li`);
+        const prjItems = document.querySelectorAll(`#${type}-projects li`);
       for (const prjItem of prjItems) {
         this.projects.push(
           new ProjItem(prjItem.id, this.switchProject.bind(this), this.type)
@@ -58,7 +58,7 @@ export class ProjectList {
       list.parentElement.classList.remove('droppable');
       // event.preventDefault();       
   
-    })
+    });
   }
   
     setSwitchHandlerFunction(switchHandlerFunction) {

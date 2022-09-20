@@ -1,4 +1,4 @@
-import { ProjectList } from "./App/ProjectList.js";
+import { ProjectList } from './App/ProjectList.js';
 
 // window.DEFAULT_VALUE = 'This is the window DEFAULT VALUE';
 globalThis.DEFAULT_VALUE = 'This is the globalThis DEFAULT VALUE';
