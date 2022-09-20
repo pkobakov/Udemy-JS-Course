@@ -1,4 +1,6 @@
-class App {
+import { ProjectList } from "./App/ProjectList.js";
+
+export class App {
   static init() {
     const activeProjectsList = new ProjectList('active');
     const finishedProjectsList = new ProjectList('finished');
