@@ -1,4 +1,4 @@
-import { ProjectItem } from "./ProjectItem.js";
+import { ProjectItem as ProjItem } from "./ProjectItem.js";
 import { DOMHelper } from "../Utility/DOMHelper.js";
 
 
@@ -10,7 +10,7 @@ export class ProjectList {
       const prjItems = document.querySelectorAll(`#${type}-projects li`);
       for (const prjItem of prjItems) {
         this.projects.push(
-          new ProjectItem(prjItem.id, this.switchProject.bind(this), this.type)
+          new ProjItem(prjItem.id, this.switchProject.bind(this), this.type)
         );
       }
       console.log(this.projects);

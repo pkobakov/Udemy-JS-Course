@@ -1,4 +1,5 @@
-import { DOMHelper } from "../Utility/DOMHelper.js";
+// import { DOMHelper, clearEventListeners } from "../Utility/DOMHelper.js";
+import * as DOMHelp from  '../Utility/DOMHelper.js';
 import { Tooltip } from "./Tooltip.js";
 
 export class ProjectItem {
@@ -54,7 +55,7 @@ export class ProjectItem {
     connectSwitchButton(type) {
       const projectItemElement = document.getElementById(this.id);
       let switchBtn = projectItemElement.querySelector('button:last-of-type');
-      switchBtn = DOMHelper.clearEventListeners(switchBtn);
+      switchBtn = DOMHelp.clearEventListeners(switchBtn);
       switchBtn.textContent = type === 'active' ? 'Finish' : 'Activate';
       switchBtn.addEventListener(
         'click',
