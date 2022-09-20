@@ -1,6 +1,6 @@
-import { Component } from "./Component.js";
+import Cmnt, { doSomething } from "./Component.js";
 
-export class Tooltip extends Component {
+export class Tooltip extends Cmnt {
     constructor(closeNotifierFunction, text, hostElementId) {
       super(hostElementId);
       this.closeNotifier = closeNotifierFunction;
@@ -14,6 +14,7 @@ export class Tooltip extends Component {
     };
   
     create() {
+      doSomething();
       const tooltipElement = document.createElement('div');
       tooltipElement.className = 'card';
       const tooltipTemplate = document.getElementById('tooltip');
