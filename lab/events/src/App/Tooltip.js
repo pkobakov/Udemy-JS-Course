@@ -1,17 +1,18 @@
-import Cmnt, { doSomething } from "./Component.js";
+import Cmnt, { doSomething } from './Component';
 
 export class Tooltip extends Cmnt {
     constructor(closeNotifierFunction, text, hostElementId) {
       super(hostElementId);
       this.closeNotifier = closeNotifierFunction;
       this.text = text;
+      this.closeTooltip = () => {
+        this.detach();
+        this.closeNotifier();
+      };
       this.create();
     }
   
-    closeTooltip = () => {
-      this.detach();
-      this.closeNotifier();
-    };
+
   
     create() {
       doSomething();

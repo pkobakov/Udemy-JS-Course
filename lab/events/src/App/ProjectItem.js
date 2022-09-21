@@ -1,15 +1,16 @@
 // import { DOMHelper, clearEventListeners } from "../Utility/DOMHelper.js";
-import * as DOMHelp from  '../Utility/DOMHelper.js';
+import * as DOMHelp from  '../Utility/DOMHelper';
 // import { Tooltip } from "./Tooltip.js";
 
 
 
 export class ProjectItem {
-    hasActiveTooltip = false;
+    // hasActiveTooltip = false;
   
     constructor(id, updateProjectListsFunction, type) {
       this.id = id;
       this.type = type;
+      this.hasActiveTooltip = false;
       this.updateProjectListsHandler = updateProjectListsFunction;
       this.connectMoreInfoButton();
       this.connectSwitchButton(type);
@@ -22,7 +23,7 @@ export class ProjectItem {
       }
       const projectElement = document.getElementById(this.id);
       const tooltipText = projectElement.dataset.extraInfo;
-      import ('./Tooltip.js').then(module => {
+      import ('./Tooltip').then(module => {
         const tooltip = new module.Tooltip(
           () => {
             this.hasActiveTooltip = false;
@@ -32,7 +33,7 @@ export class ProjectItem {
         );
         tooltip.attach();
         this.hasActiveTooltip = true;
-      }) 
+      }); 
 
     }
   
@@ -41,11 +42,11 @@ export class ProjectItem {
       item.addEventListener('dragstart', event => {
         event.dataTransfer.setData('text/plain', this.id);
         event.dataTransfer.effectAllowed = 'move';
-      })
+      });
   
       item.addEventListener('dragend',  event => {
         console.log(event);
-      })
+      });
   
     }
   
