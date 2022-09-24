@@ -8,6 +8,19 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.[name][contenthash].js',
+        clean: true,
+        assetModuleFilename: '[name][ext]' 
+    },
+    devtool: 'source-map',
+    devServer: {
+        static: {
+            directory: path.resolve(__dirname, 'dist' ),
+        },
+        port: 3030,
+        open: true,
+        hot: true,
+        compress: true,
+        historyApiFallback: true,
     },
 
     module: {
@@ -19,6 +32,10 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource'
             }
         ]
     },
