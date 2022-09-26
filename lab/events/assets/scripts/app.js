@@ -1,6 +1,3 @@
-/* eslint-disable no-unexpected-multiline */
-/* eslint-disable semi */
-/* eslint-disable no-unused-vars */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
 /******/ 	function webpackJsonpCallback(data) {
@@ -29,7 +26,7 @@
 /******/ 			resolves.shift()();
 /******/ 		}
 /******/
-/******/ 	}
+/******/ 	};
 /******/
 /******/
 /******/ 	// The module cache
@@ -39,14 +36,14 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		'main': 0
+/******/ 		"main": 0
 /******/ 	};
 /******/
 /******/
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + '' + chunkId + '.app.js'
+/******/ 		return __webpack_require__.p + "" + chunkId + ".app.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -101,7 +98,7 @@
 /******/ 				script.charset = 'utf-8';
 /******/ 				script.timeout = 120;
 /******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute('nonce', __webpack_require__.nc);
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 				}
 /******/ 				script.src = jsonpScriptSrc(chunkId);
 /******/
@@ -185,12 +182,12 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = 'assets/scripts/';
+/******/ 	__webpack_require__.p = "assets/scripts/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
-/******/ 	var jsonpArray = window['webpackJsonp'] = window['webpackJsonp'] || [];
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
 /******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
 /******/ 	jsonpArray.push = webpackJsonpCallback;
 /******/ 	jsonpArray = jsonpArray.slice();
@@ -199,56 +196,56 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = './src/app.js');
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/app.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ './src/App/ProjectItem.js':
+/***/ "./src/App/ProjectItem.js":
 /*!********************************!*\
   !*** ./src/App/ProjectItem.js ***!
   \********************************/
 /*! exports provided: ProjectItem */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-'use strict';
-eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectItem", function() { return ProjectItem; });\n/* harmony import */ var _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utility/DOMHelper */ "./src/Utility/DOMHelper.js");\n// import { DOMHelper, clearEventListeners } from "../Utility/DOMHelper.js";\r\n\r\n// import { Tooltip } from "./Tooltip.js";\r\n\r\n\r\n\r\nclass ProjectItem {\r\n    // hasActiveTooltip = false;\r\n  \r\n    constructor(id, updateProjectListsFunction, type) {\r\n      this.id = id;\r\n      this.type = type;\r\n      this.hasActiveTooltip = false;\r\n      this.updateProjectListsHandler = updateProjectListsFunction;\r\n      this.connectMoreInfoButton();\r\n      this.connectSwitchButton(type);\r\n      this.connectDrag();\r\n    }\r\n  \r\n    showMoreInfoHandler() {\r\n      if (this.hasActiveTooltip) {\r\n        return;\r\n      }\r\n      const projectElement = document.getElementById(this.id);\r\n      const tooltipText = projectElement.dataset.extraInfo;\r\n      __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./Tooltip */ "./src/App/Tooltip.js")).then(module => {\r\n        const tooltip = new module.Tooltip(\r\n          () => {\r\n            this.hasActiveTooltip = false;\r\n          },\r\n          tooltipText,\r\n          this.id\r\n        );\r\n        tooltip.attach();\r\n        this.hasActiveTooltip = true;\r\n      }); \r\n\r\n    }\r\n  \r\n    connectDrag() {\r\n      const item = document.getElementById(this.id);\r\n      item.addEventListener(\'dragstart\', event => {\r\n        event.dataTransfer.setData(\'text/plain\', this.id);\r\n        event.dataTransfer.effectAllowed = \'move\';\r\n      });\r\n  \r\n      item.addEventListener(\'dragend\',  event => {\r\n        console.log(event);\r\n      });\r\n  \r\n    }\r\n  \r\n    connectMoreInfoButton() {\r\n      const projectItemElement = document.getElementById(this.id);\r\n      const moreInfoBtn = projectItemElement.querySelector(\r\n        \'button:first-of-type\'\r\n      );\r\n      moreInfoBtn.addEventListener(\'click\', this.showMoreInfoHandler.bind(this));\r\n    }\r\n  \r\n    connectSwitchButton(type) {\r\n      const projectItemElement = document.getElementById(this.id);\r\n      let switchBtn = projectItemElement.querySelector(\'button:last-of-type\');\r\n      switchBtn = _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_0__["clearEventListeners"](switchBtn);\r\n      switchBtn.textContent = type === \'active\' ? \'Finish\' : \'Activate\';\r\n      switchBtn.addEventListener(\r\n        \'click\',\r\n        this.updateProjectListsHandler.bind(null, this.id)\r\n      );\r\n    }\r\n  \r\n    update(updateProjectListsFn, type) {\r\n      this.updateProjectListsHandler = updateProjectListsFn;\r\n      this.connectSwitchButton(type);\r\n    }\r\n  }\n\n//# sourceURL=webpack:///./src/App/ProjectItem.js?');
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ProjectItem\", function() { return ProjectItem; });\n/* harmony import */ var _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Utility/DOMHelper */ \"./src/Utility/DOMHelper.js\");\n// import { DOMHelper, clearEventListeners } from \"../Utility/DOMHelper.js\";\r\n\r\n// import { Tooltip } from \"./Tooltip.js\";\r\n\r\n\r\n\r\nclass ProjectItem {\r\n    // hasActiveTooltip = false;\r\n  \r\n    constructor(id, updateProjectListsFunction, type) {\r\n      this.id = id;\r\n      this.type = type;\r\n      this.hasActiveTooltip = false;\r\n      this.updateProjectListsHandler = updateProjectListsFunction;\r\n      this.connectMoreInfoButton();\r\n      this.connectSwitchButton(type);\r\n      this.connectDrag();\r\n    }\r\n  \r\n    showMoreInfoHandler() {\r\n      if (this.hasActiveTooltip) {\r\n        return;\r\n      }\r\n      const projectElement = document.getElementById(this.id);\r\n      const tooltipText = projectElement.dataset.extraInfo;\r\n      __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./Tooltip */ \"./src/App/Tooltip.js\")).then(module => {\r\n        const tooltip = new module.Tooltip(\r\n          () => {\r\n            this.hasActiveTooltip = false;\r\n          },\r\n          tooltipText,\r\n          this.id\r\n        );\r\n        tooltip.attach();\r\n        this.hasActiveTooltip = true;\r\n      }); \r\n\r\n    }\r\n  \r\n    connectDrag() {\r\n      const item = document.getElementById(this.id);\r\n      item.addEventListener('dragstart', event => {\r\n        event.dataTransfer.setData('text/plain', this.id);\r\n        event.dataTransfer.effectAllowed = 'move';\r\n      });\r\n  \r\n      item.addEventListener('dragend',  event => {\r\n        console.log(event);\r\n      });\r\n  \r\n    }\r\n  \r\n    connectMoreInfoButton() {\r\n      const projectItemElement = document.getElementById(this.id);\r\n      const moreInfoBtn = projectItemElement.querySelector(\r\n        'button:first-of-type'\r\n      );\r\n      moreInfoBtn.addEventListener('click', this.showMoreInfoHandler.bind(this));\r\n    }\r\n  \r\n    connectSwitchButton(type) {\r\n      const projectItemElement = document.getElementById(this.id);\r\n      let switchBtn = projectItemElement.querySelector('button:last-of-type');\r\n      switchBtn = _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_0__[\"clearEventListeners\"](switchBtn);\r\n      switchBtn.textContent = type === 'active' ? 'Finish' : 'Activate';\r\n      switchBtn.addEventListener(\r\n        'click',\r\n        this.updateProjectListsHandler.bind(null, this.id)\r\n      );\r\n    }\r\n  \r\n    update(updateProjectListsFn, type) {\r\n      this.updateProjectListsHandler = updateProjectListsFn;\r\n      this.connectSwitchButton(type);\r\n    }\r\n  }\n\n//# sourceURL=webpack:///./src/App/ProjectItem.js?");
 
 /***/ }),
 
-/***/ './src/App/ProjectList.js':
+/***/ "./src/App/ProjectList.js":
 /*!********************************!*\
   !*** ./src/App/ProjectList.js ***!
   \********************************/
 /*! exports provided: ProjectList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-'use strict';
-eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectList", function() { return ProjectList; });\n/* harmony import */ var _ProjectItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProjectItem */ "./src/App/ProjectItem.js");\n/* harmony import */ var _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/DOMHelper */ "./src/Utility/DOMHelper.js");\n\r\n\r\n\r\n\r\nclass ProjectList {\r\n    // projects = [];\r\n  \r\n    constructor(type) {\r\n      this.type = type;\r\n      this.projects = [];\r\n      const prjItems = document.querySelectorAll(`#${type}-projects li`);\r\n      for (const prjItem of prjItems) {\r\n        this.projects.push(\r\n          new _ProjectItem__WEBPACK_IMPORTED_MODULE_0__["ProjectItem"](prjItem.id, this.switchProject.bind(this), this.type)\r\n        );\r\n      }\r\n      console.log(this.projects);\r\n      this.connectDroppable();\r\n    }\r\n  \r\n  connectDroppable() {\r\n    // console.log(window.DEFAULT_VALUE);\r\n    console.log(globalThis.DEFAULT_VALUE);\r\n    const list = document.querySelector(`#${this.type}-projects ul`);\r\n    list.addEventListener(\'dragenter\', event => {\r\n      if (event.dataTransfer.types[0] === \'text/plain\') {\r\n        list.parentElement.classList.add(\'droppable\');\r\n        event.preventDefault();\r\n      }\r\n        \r\n    });\r\n  \r\n  \r\n    list.addEventListener(\'dragover\', event => {\r\n      if (event.dataTransfer.types[0] === \'text/plain\') {\r\n        event.preventDefault();\r\n      } \r\n  \r\n    });\r\n  \r\n    list.addEventListener(\'dragleave\', event => {\r\n      if (event.relatedTarget.closest(`#${this.type}-projects ul`) !== list) {\r\n        list.parentElement.classList.remove(\'droppable\');\r\n      }\r\n       \r\n  \r\n    });\r\n  \r\n    list.addEventListener(\'drop\', event => {\r\n      const projId = event.dataTransfer.getData(\'text/plain\');\r\n      if (this.projects.find(p => p.id === projId)) {\r\n        return;\r\n      }\r\n  \r\n      document\r\n      .getElementById(projId)\r\n      .querySelector(\'button:last-of-type\')\r\n      .click();\r\n      list.parentElement.classList.remove(\'droppable\');\r\n      // event.preventDefault();       \r\n  \r\n    });\r\n  }\r\n  \r\n    setSwitchHandlerFunction(switchHandlerFunction) {\r\n      this.switchHandler = switchHandlerFunction;\r\n    }\r\n  \r\n    addProject(project) {\r\n      this.projects.push(project);\r\n      _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_1__["DOMHelper"].moveElement(project.id, `#${this.type}-projects ul`);\r\n      project.update(this.switchProject.bind(this), this.type);\r\n    }\r\n  \r\n    switchProject(projectId) {\r\n      // const projectIndex = this.projects.findIndex(p => p.id === projectId);\r\n      // this.projects.splice(projectIndex, 1);\r\n      this.switchHandler(this.projects.find(p => p.id === projectId));\r\n      this.projects = this.projects.filter(p => p.id !== projectId);\r\n    }\r\n  }\n\n//# sourceURL=webpack:///./src/App/ProjectList.js?');
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ProjectList\", function() { return ProjectList; });\n/* harmony import */ var _ProjectItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProjectItem */ \"./src/App/ProjectItem.js\");\n/* harmony import */ var _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/DOMHelper */ \"./src/Utility/DOMHelper.js\");\n\r\n\r\n\r\n\r\nclass ProjectList {\r\n    // projects = [];\r\n  \r\n    constructor(type) {\r\n      this.type = type;\r\n      this.projects = [];\r\n      const prjItems = document.querySelectorAll(`#${type}-projects li`);\r\n      for (const prjItem of prjItems) {\r\n        this.projects.push(\r\n          new _ProjectItem__WEBPACK_IMPORTED_MODULE_0__[\"ProjectItem\"](prjItem.id, this.switchProject.bind(this), this.type)\r\n        );\r\n      }\r\n      console.log(this.projects);\r\n      this.connectDroppable();\r\n    }\r\n  \r\n  connectDroppable() {\r\n    // console.log(window.DEFAULT_VALUE);\r\n    console.log(globalThis.DEFAULT_VALUE);\r\n    const list = document.querySelector(`#${this.type}-projects ul`);\r\n    list.addEventListener('dragenter', event => {\r\n      if (event.dataTransfer.types[0] === 'text/plain') {\r\n        list.parentElement.classList.add('droppable');\r\n        event.preventDefault();\r\n      }\r\n        \r\n    });\r\n  \r\n  \r\n    list.addEventListener('dragover', event => {\r\n      if (event.dataTransfer.types[0] === 'text/plain') {\r\n        event.preventDefault();\r\n      } \r\n  \r\n    });\r\n  \r\n    list.addEventListener('dragleave', event => {\r\n      if (event.relatedTarget.closest(`#${this.type}-projects ul`) !== list) {\r\n        list.parentElement.classList.remove('droppable');\r\n      }\r\n       \r\n  \r\n    });\r\n  \r\n    list.addEventListener('drop', event => {\r\n      const projId = event.dataTransfer.getData('text/plain');\r\n      if (this.projects.find(p => p.id === projId)) {\r\n        return;\r\n      }\r\n  \r\n      document\r\n      .getElementById(projId)\r\n      .querySelector('button:last-of-type')\r\n      .click();\r\n      list.parentElement.classList.remove('droppable');\r\n      // event.preventDefault();       \r\n  \r\n    });\r\n  }\r\n  \r\n    setSwitchHandlerFunction(switchHandlerFunction) {\r\n      this.switchHandler = switchHandlerFunction;\r\n    }\r\n  \r\n    addProject(project) {\r\n      this.projects.push(project);\r\n      _Utility_DOMHelper__WEBPACK_IMPORTED_MODULE_1__[\"DOMHelper\"].moveElement(project.id, `#${this.type}-projects ul`);\r\n      project.update(this.switchProject.bind(this), this.type);\r\n    }\r\n  \r\n    switchProject(projectId) {\r\n      // const projectIndex = this.projects.findIndex(p => p.id === projectId);\r\n      // this.projects.splice(projectIndex, 1);\r\n      this.switchHandler(this.projects.find(p => p.id === projectId));\r\n      this.projects = this.projects.filter(p => p.id !== projectId);\r\n    }\r\n  }\n\n//# sourceURL=webpack:///./src/App/ProjectList.js?");
 
 /***/ }),
 
-/***/ './src/Utility/DOMHelper.js':
+/***/ "./src/Utility/DOMHelper.js":
 /*!**********************************!*\
   !*** ./src/Utility/DOMHelper.js ***!
   \**********************************/
 /*! exports provided: DOMHelper, clearEventListeners, moveElement */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-'use strict';
-eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DOMHelper", function() { return DOMHelper; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearEventListeners", function() { return clearEventListeners; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "moveElement", function() { return moveElement; });\nclass DOMHelper {\r\n    static clearEventListeners(element) {\r\n      const clonedElement = element.cloneNode(true);\r\n      element.replaceWith(clonedElement);\r\n      return clonedElement;\r\n    }\r\n  \r\n    static moveElement(elementId, newDestinationSelector) {\r\n      const element = document.getElementById(elementId);\r\n      const destinationElement = document.querySelector(newDestinationSelector);\r\n      destinationElement.append(element);\r\n      element.scrollIntoView({ behavior: \'smooth\' });\r\n    }\r\n  }\r\n\r\n  function clearEventListeners(element) {\r\n    const clonedElement = element.cloneNode(true);\r\n    element.replaceWith(clonedElement);\r\n    return clonedElement;\r\n  }\r\n\r\n  function moveElement(elementId, newDestinationSelector) {\r\n    const element = document.getElementById(elementId);\r\n    const destinationElement = document.querySelector(newDestinationSelector);\r\n    destinationElement.append(element);\r\n    element.scrollIntoView({ behavior: \'smooth\' });\r\n  }\n\n//# sourceURL=webpack:///./src/Utility/DOMHelper.js?');
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"DOMHelper\", function() { return DOMHelper; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"clearEventListeners\", function() { return clearEventListeners; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"moveElement\", function() { return moveElement; });\nclass DOMHelper {\r\n    static clearEventListeners(element) {\r\n      const clonedElement = element.cloneNode(true);\r\n      element.replaceWith(clonedElement);\r\n      return clonedElement;\r\n    }\r\n  \r\n    static moveElement(elementId, newDestinationSelector) {\r\n      const element = document.getElementById(elementId);\r\n      const destinationElement = document.querySelector(newDestinationSelector);\r\n      destinationElement.append(element);\r\n      element.scrollIntoView({ behavior: 'smooth' });\r\n    }\r\n  }\r\n\r\n  function clearEventListeners(element) {\r\n    const clonedElement = element.cloneNode(true);\r\n    element.replaceWith(clonedElement);\r\n    return clonedElement;\r\n  }\r\n\r\n  function moveElement(elementId, newDestinationSelector) {\r\n    const element = document.getElementById(elementId);\r\n    const destinationElement = document.querySelector(newDestinationSelector);\r\n    destinationElement.append(element);\r\n    element.scrollIntoView({ behavior: 'smooth' });\r\n  }\n\n//# sourceURL=webpack:///./src/Utility/DOMHelper.js?");
 
 /***/ }),
 
-/***/ './src/app.js':
+/***/ "./src/app.js":
 /*!********************!*\
   !*** ./src/app.js ***!
   \********************/
 /*! exports provided: App */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-'use strict';
-eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "App", function() { return App; });\n/* harmony import */ var _App_ProjectList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App/ProjectList */ "./src/App/ProjectList.js");\n\n\n// window.DEFAULT_VALUE = \'This is the window DEFAULT VALUE\';\nglobalThis.DEFAULT_VALUE = \'This is the globalThis DEFAULT VALUE\';\n\nclass App {\n  static init() {\n    const activeProjectsList = new _App_ProjectList__WEBPACK_IMPORTED_MODULE_0__["ProjectList"](\'active\');\n    const finishedProjectsList = new _App_ProjectList__WEBPACK_IMPORTED_MODULE_0__["ProjectList"](\'finished\');\n    activeProjectsList.setSwitchHandlerFunction(\n      finishedProjectsList.addProject.bind(finishedProjectsList)\n    );\n    finishedProjectsList.setSwitchHandlerFunction(\n      activeProjectsList.addProject.bind(activeProjectsList)\n    );\n\n    // const timerId = setTimeout(this.startAnalytics, 3000);\n\n    // document.getElementById(\'stop-analytics-btn\').addEventListener(\'click\', () => {\n    //   clearTimeout(timerId);\n    // });\n  }\n\n  static startAnalytics() {\n    const analyticsScript = document.createElement(\'script\');\n    analyticsScript.src = \'assets/scripts/Utility/Analytics.js\';\n    analyticsScript.defer = true;\n    document.head.append(analyticsScript);\n  }\n}\n\nApp.init();\n\n\n//# sourceURL=webpack:///./src/app.js?');
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"App\", function() { return App; });\n/* harmony import */ var _App_ProjectList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App/ProjectList */ \"./src/App/ProjectList.js\");\n\n\n// window.DEFAULT_VALUE = 'This is the window DEFAULT VALUE';\nglobalThis.DEFAULT_VALUE = 'This is the globalThis DEFAULT VALUE';\n\nclass App {\n  static init() {\n    const activeProjectsList = new _App_ProjectList__WEBPACK_IMPORTED_MODULE_0__[\"ProjectList\"]('active');\n    const finishedProjectsList = new _App_ProjectList__WEBPACK_IMPORTED_MODULE_0__[\"ProjectList\"]('finished');\n    activeProjectsList.setSwitchHandlerFunction(\n      finishedProjectsList.addProject.bind(finishedProjectsList)\n    );\n    finishedProjectsList.setSwitchHandlerFunction(\n      activeProjectsList.addProject.bind(activeProjectsList)\n    );\n\n    // const timerId = setTimeout(this.startAnalytics, 3000);\n\n    // document.getElementById('stop-analytics-btn').addEventListener('click', () => {\n    //   clearTimeout(timerId);\n    // });\n  }\n\n  static startAnalytics() {\n    const analyticsScript = document.createElement('script');\n    analyticsScript.src = 'assets/scripts/Utility/Analytics.js';\n    analyticsScript.defer = true;\n    document.head.append(analyticsScript);\n  }\n}\n\nApp.init();\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ })
 

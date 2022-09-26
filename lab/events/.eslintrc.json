@@ -11,14 +11,9 @@
         "sourceType": "module"
     },
     "rules": {
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "no-undef": "off"
+        "no-unused-vars":"off",
+        "no-extra-semi":"off",
+        "no-undef": "off",
+        "no-unexpected-multiline":"off"
     }
 }

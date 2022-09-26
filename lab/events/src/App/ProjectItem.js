@@ -29,7 +29,7 @@ export class ProjectItem {
             this.hasActiveTooltip = false;
           },
           tooltipText,
-          this.id
+          this.id,
         );
         tooltip.attach();
         this.hasActiveTooltip = true;
