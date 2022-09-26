@@ -1,27 +1,19 @@
 const storeBtn = document.getElementById('store-btn');
 const retrBtn = document.getElementById('retrieve-btn');
 
-const userId = 'user123';
-const user = {
-    name: 'Peter',
-    age: 45,
-    hobbies: ['Ski','Hockey','Soccer']
-};
 
 storeBtn.addEventListener('click', ()=> {
- 
-    sessionStorage.setItem('id', userId);
-    localStorage.setItem('user', JSON.stringify(user));
+const userId = 'id1';
+const user = {name: 'Peter', age: 45}
+document.cookie = `userId=${userId}; max-age=10`;  // setting the expiration
+document.cookie =`user=${JSON.stringify(user)}`;
     
 });
 
 retrBtn.addEventListener('click', () => {
-   const extractedId =  localStorage.getItem('id');
-   const extractedUser = JSON.parse(localStorage.getItem('user'));
-   console.log(extractedUser);
-   if (extractedId) {
-    console.log('Got the Id - '+ extractedId);
-   } else {
-    console.log('Could not find id.');
-   }
-})
+   const cookieData = document.cookie.split(';');
+   const data = cookieData.map(item => {
+    return item.trim();
+   });
+    console.log(data[1].split('=')[1]); //user value
+});
