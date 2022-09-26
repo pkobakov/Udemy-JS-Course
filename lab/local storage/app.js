@@ -10,8 +10,9 @@ const user = {
 
 storeBtn.addEventListener('click', ()=> {
  
+    sessionStorage.setItem('id', userId);
     localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('id', userId);
+    
 });
 
 retrBtn.addEventListener('click', () => {
