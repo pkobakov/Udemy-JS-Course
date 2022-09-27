@@ -11,7 +11,11 @@
   },
   "author": "Maximilian Schwarzmueller",
   "license": "ISC",
+  "browserslist": "> 2%",
   "devDependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^6.4.0",
     "webpack": "^4.46.0",
