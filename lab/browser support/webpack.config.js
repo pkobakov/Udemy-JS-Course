@@ -23,7 +23,7 @@ module.exports = {
           options: {
             presets: [
               ['@babel/preset-env',
-               { useBuiltIns: 'usage', corejs: { version: 3 } }
+               { useBuiltIns: 'entry', corejs: { version: 3 } }
               ]
             ]
           }
