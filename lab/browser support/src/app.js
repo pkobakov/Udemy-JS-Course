@@ -1,5 +1,11 @@
+// import 'core-js/features/promise';
+
+
 const button = document.querySelector('button');
 const textParagraph = document.querySelector('p');
+
+const promise = new Promise();
+console.log(promise);
 
 button.addEventListener('click', () => {
   const text = textParagraph.textContent;
