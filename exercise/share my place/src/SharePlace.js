@@ -1,5 +1,14 @@
+import {Modal} from './UI/Modal';
+
+class Coordinates {
+    constructor(lat, lng) {
+        this.latitude = lat;
+        this.longitude = lng;
+    }
+}
+
 class PlaceFinder {
-   constructor(){
+   constructor() {
     const addressForm = document.querySelector('form');
     const locateUserBtn = document.getElementById('locate-btn');
 
@@ -13,18 +22,20 @@ class PlaceFinder {
         alert('Location feature is not available. Please use more modern browser or enter the address manually.');
         return;
     }
-
+    const modal = new Modal('loading-modal-content', 'Loading location - please wait');
+    modal.show();
     navigator.geolocation.getCurrentPosition(
         sucessResult => {
-            console.log(sucessResult);
-            const coordinates = {
-                lat: sucessResult.coords.latitude + Math.random() * 50,
-                lng: sucessResult.coords.longitude + Math.random() * 50
-            };
+            // console.log(sucessResult);
+            modal.hide();
+            const lat = sucessResult.coords.latitude + Math.random() * 50;
+            const lng = sucessResult.coords.longitude + Math.random() * 50;
+            const coordinates = new Coordinates (lat, lng);
             console.log(coordinates);
         }, 
         error => {
-       alert('Could not locate you. Please enter the location manually.')
+            modal.hide();
+            alert('Could not locate you. Please enter the location manually.')
     })
 
    }
