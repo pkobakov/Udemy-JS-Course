@@ -1,53 +1,74 @@
 import { Modal } from './UI/Modal';
 import { Map } from './UI/Map';
-
-
+import { getCoordsFromAddress } from './Utility/Location';
 
 class PlaceFinder {
-   constructor() {
+  constructor() {
     const addressForm = document.querySelector('form');
     const locateUserBtn = document.getElementById('locate-btn');
 
     locateUserBtn.addEventListener('click', this.locateUserHandler.bind(this));
-    addressForm.addEventListener('click', this.findAddressHandler);
-       
-   }
+    addressForm.addEventListener('submit', this.findAddressHandler.bind(this));
+  }
 
-   selectPlace(coordinates) {
+  selectPlace(coordinates) {
     if (this.map) {
-        this.map.render();
+      this.map.render(coordinates);
     } else {
-        this.map = new Map(coordinates);
+      this.map = new Map(coordinates);
     }
-   }
+  }
 
-   locateUserHandler(){
+  locateUserHandler() {
     if (!navigator.geolocation) {
-        alert('Location feature is not available. Please use more modern browser or enter the address manually.');
-        return;
+      alert(
+        'Location feature is not available in your browser - please use a more modern browser or manually enter an address.'
+      );
+      return;
     }
-    const modal = new Modal('loading-modal-content', 'Loading location - please wait');
+    const modal = new Modal(
+      'loading-modal-content',
+      'Loading location - please wait!'
+    );
     modal.show();
     navigator.geolocation.getCurrentPosition(
-        sucessResult => {
-            // console.log(sucessResult);
-            modal.hide();
-            const coordinates = {
-                lat: sucessResult.coords.latitude,
-                lng: sucessResult.coords.longitude
-            };
-            this.selectPlace(coordinates);
-        }, 
-        error => {
-            modal.hide();
-            alert('Could not locate you. Please enter the location manually.')
-    })
+      successResult => {
+        modal.hide();
+        const coordinates = {
+          lat: successResult.coords.latitude,
+          lng: successResult.coords.longitude
+        };
+        this.selectPlace(coordinates);
+      },
+      error => {
+        modal.hide();
+        alert(
+          'Could not locate you unfortunately. Please enter an address manually!'
+        );
+      }
+    );
+  }
 
-   }
-
-   findAddressHandler(){
-
-   } 
+  async findAddressHandler(event) {
+    event.preventDefault();
+    const address = event.target.querySelector('input').value;
+    if (!address || address.trim().length === 0) {
+      alert('Invalid address entered - please try again!');
+      return;
+    }
+    const modal = new Modal(
+      'loading-modal-content',
+      'Loading location - please wait!'
+    );
+    modal.show();
+    try {
+      const coordinates = await getCoordsFromAddress(address);
+      this.selectPlace(coordinates);
+    } catch (err) {
+      alert(err.message);
+    }
+    modal.hide();
+  }
 }
 
 const placeFinder = new PlaceFinder();
