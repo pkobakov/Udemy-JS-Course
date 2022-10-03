@@ -1,0 +1,17 @@
+body{
+    padding: 20px;
+    font-family: Helvetica, sans-serif;
+}
+
+#button {
+    padding: 5px;
+    background-color: green;
+    color: white;
+    border-radius: 2px;
+}
+
+
+img {
+    width: 350px;
+
+}
