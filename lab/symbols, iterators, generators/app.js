@@ -74,3 +74,25 @@ console.log(course.toString());
 Reflect.defineProperty(course, 'credits', {value: 46});
 
 console.log(course);
+
+// Proxy API 
+const courseHandler = {
+    get(obj, propertyName) {
+        console.log(propertyName);
+        return obj[propertyName] || 'NOT FOUND';
+    },
+
+    set(obj, propertyName, newValue){
+        console.log('Sendeing data...');
+        if (propertyName === 'rating') {
+            return;
+        }
+        obj[propertyName] = newValue;
+    }
+};
+
+
+
+const pCourse  = new Proxy(course, courseHandler);
+pCourse.descriptopn = 'JavaScript Course - Edition 2022';
+console.log(pCourse.title, pCourse.descriptopn);
