@@ -33,7 +33,9 @@ const company = {
 };
 
 
-console.log(company.next());
-console.log(company.next());
-console.log(company.next());
-console.log(company.next());
+let employee = company.next();
+
+while (!employee.done) {
+    console.log(employee.value);
+    employee = company.next();
+}
