@@ -16,26 +16,47 @@ console.log(person.toString());
 
 
 const company = {
-    currEmployee: 0,
+    // currEmployee: 0,
     employees: ['Anna','Max','Peter'],
-    next(){
-        if (this.currEmployee >= this.employees.length) {
-            return {value: this.currEmployee, done: true};
-        }
-        const returnValue = {
-            value: this.employees[this.currEmployee],
-            done: false
-        };
+    // next(){
+    //     if (this.currEmployee >= this.employees.length) {
+    //         return {value: this.currEmployee, done: true};
+    //     }
+    //     const returnValue = {
+    //         value: this.employees[this.currEmployee],
+    //         done: false
+    //     };
 
-        this.currEmployee++;
-        return returnValue; 
+    //     this.currEmployee++;
+    //     return returnValue; 
+    // }
+    [Symbol.iterator]: function* employeeGenerator(){
+        let currEmployee = 0;
+
+        while (currEmployee < this.employees.length) {
+            yield this.employees[currEmployee];
+            currEmployee++;
+        }
     }
 };
 
 
-let employee = company.next();
 
-while (!employee.done) {
-    console.log(employee.value);
-    employee = company.next();
+// let employee = company.next();
+
+// while (!employee.done) {
+//     console.log(employee.value);
+//     employee = company.next();
+// }
+
+// let it = company.getEmployee();
+
+// console.log(it.next());
+// console.log(it.next());
+// console.log(it.next());
+
+for (const employee of company) {
+    console.log(employee);
 }
+console.log([...company]);
+
