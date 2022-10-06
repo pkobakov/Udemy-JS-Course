@@ -1,28 +1,14 @@
-const http = require('http');
+const express = require('express');
 
-const server = http.createServer((request, response) => {
-    let body = [];
-    request.on('data', (chunk) => {
-        body.push(chunk);
-    });
+const app = express();
 
-    request.on('end', () => {
-      body = Buffer.concat(body).toString();
-      let userName = 'Unknown User';
+app.use((req, res, next) => {
+    res.setHeader('Content-Type', 'text/html');
+    next();
+})
 
-      if (body) {
-        userName = body.split('=')[1];
-      }
+app.use((req, res, next) => {
+    res.send('<h1>Hello World!</h1>');
+})
 
-      response.setHeader('Content-Type', 'text/html');
-      response.write(
-          `<h1>Hi from ${userName}</h1><form method="POST" action="/"><input type="text" name="username"><button type="submit">Send</button></input></form>`
-          );
-      response.end();
-
-    });
-
-
-});
-
-server.listen(3000);
+app.listen(3000);
