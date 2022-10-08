@@ -51,7 +51,7 @@ class PlaceFinder {
    }).then( response => {
      return response.json();
    }).then( data => {
-    console.log(data);
+      console.log(data);
    });
 
     this.shareBtn.disabled = false;
