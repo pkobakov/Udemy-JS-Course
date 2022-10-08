@@ -51,12 +51,14 @@ class PlaceFinder {
    }).then( response => {
      return response.json();
    }).then( data => {
-      console.log(data);
-   });
-
+    const locationId = data.locId;
     this.shareBtn.disabled = false;
     const sharedLinkInputElement = document.getElementById('share-link');
-    sharedLinkInputElement.value = `${location.origin}/my-place?address=${encodeURI(address)}&lat=${coordinates.lat}&lng=${coordinates.lng}`; 
+    sharedLinkInputElement.value = `${location.origin
+    }/my-place?location=${locationId}`;
+   });
+
+  
   }
 
   locateUserHandler() {
