@@ -19,6 +19,28 @@ function getMinimum(input) {
     return currentMinimum;
 }
 
-const min = getMinimum([7,5,3,2,8]);
+function getMinimum2(input) {
+    if (input.length === 0) {
+        throw new Error('Should not be an empty array.');
+    }
+
+    for (let i = 0; i < input.length; i++) {
+        let outerElement = input[i];
+        for (let j = 1; j < input.length; j++) {
+            let innerElement = input[j];
+
+            if (outerElement > innerElement ) {
+                input[i] = innerElement;
+                input[j] = outerElement;
+
+                innerElement = input[i];
+                outerElement = input[j];
+            }
+        }
+    }
+    return input[0];
+}
+
+const min = getMinimum2([7,5,3,8]);
 console.log(min);
 
