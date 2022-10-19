@@ -1,3 +1,40 @@
+// Class Syntax Type 1:
+
+// class User {
+//   name: string;
+//   private age: number;
+
+//   constructor(name:string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// }
+
+//Class Syntax Type 2:
+
+class User implements Greetable {
+  constructor( public name: string, private age: number){}
+  greeting(): void {
+   console.log('Hello ' + this.name);  
+ }
+}
+
+
+class Admin extends User {
+  constructor(name: string, age: number, private permissions: string []){
+    super(name, age);
+  }
+}
+
+interface Greetable {
+  greeting(): void;
+}
+
+const user = new User('Peter', 47);
+const admin = new Admin('Max', 53, ['ski', 'singing']);
+user.greeting();
+admin.greeting();
+
 const input1 = document.getElementById('number-1') as HTMLInputElement;
 const input2 = document.getElementById('number-2') as HTMLInputElement;
 const buttonElement = document.querySelector('button');
@@ -23,7 +60,12 @@ function printResult(result: ResultMode, printMode : OutputMode) {
 // let isDone = true;
 // printResult(result);
 
-type CalculationResults = { res: number, print: () => void};
+interface CalculationContainer {
+  res: number;
+  print: () => void;
+}
+
+type CalculationResults = CalculationContainer;
 const results: CalculationResults [] = [];
 
 
