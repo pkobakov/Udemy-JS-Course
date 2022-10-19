@@ -14,10 +14,21 @@ function printResult(result) {
 // let isDone = true;
 // printResult(result);
 
+const results:{res: number, print: () => void }[] = [];
+
 buttonElement?.addEventListener('click', () => {
     console.log('The sum is:');
     const num1 = +input1.value;
     const num2 = +input2.value;
     const result = add(num1, num2);
-    printResult(result);
+    const resultsContainer : { res: number, print: () => void } = {
+      res: result,
+      print() {
+          console.log(this.res);
+      },
+    };
+    results.push(resultsContainer);
+    printResult(results);
+    results[0].print();
 });
+

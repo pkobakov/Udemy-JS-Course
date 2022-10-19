@@ -10,10 +10,19 @@ function printResult(result) {
 // const result = writeText('Hello ', 'World!');
 // let isDone = true;
 // printResult(result);
+var results = [];
 buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addEventListener('click', function () {
     console.log('The sum is:');
     var num1 = +input1.value;
     var num2 = +input2.value;
     var result = add(num1, num2);
-    printResult(result);
+    var resultsContainer = {
+        res: result,
+        print: function () {
+            console.log(this.res);
+        }
+    };
+    results.push(resultsContainer);
+    printResult(results);
+    results[0].print();
 });
