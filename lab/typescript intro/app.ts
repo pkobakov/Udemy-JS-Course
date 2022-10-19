@@ -6,29 +6,43 @@ function add(a:number, b:number) {
   return a + b;
 }
 
-function printResult(result) {
+type ResultMode = string | number;
+enum OutputMode {CONSOLE, ALERT}; 
+
+function printResult(result: ResultMode, printMode : OutputMode) {
+  if (printMode === OutputMode.CONSOLE) {
     console.log(result);
+  } 
+
+  if (printMode === OutputMode.ALERT) {
+    alert(result);
+  }
 }
 
 // const result = writeText('Hello ', 'World!');
 // let isDone = true;
 // printResult(result);
 
-const results:{res: number, print: () => void }[] = [];
+type CalculationResults = { res: number, print: () => void};
+const results: CalculationResults [] = [];
+
+
 
 buttonElement?.addEventListener('click', () => {
     console.log('The sum is:');
     const num1 = +input1.value;
     const num2 = +input2.value;
     const result = add(num1, num2);
-    const resultsContainer : { res: number, print: () => void } = {
+    const resultsContainer : CalculationResults = {
       res: result,
       print() {
           console.log(this.res);
       },
     };
     results.push(resultsContainer);
-    printResult(results);
-    results[0].print();
+    
+    printResult(result, OutputMode.CONSOLE);
+    printResult(result, OutputMode.ALERT);
+     
 });
 

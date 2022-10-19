@@ -4,12 +4,20 @@ var buttonElement = document.querySelector('button');
 function add(a, b) {
     return a + b;
 }
-function printResult(result) {
-    console.log(result);
+var OutputMode;
+(function (OutputMode) {
+    OutputMode[OutputMode["CONSOLE"] = 0] = "CONSOLE";
+    OutputMode[OutputMode["ALERT"] = 1] = "ALERT";
+})(OutputMode || (OutputMode = {}));
+;
+function printResult(result, printMode) {
+    if (printMode === OutputMode.CONSOLE) {
+        console.log(result);
+    }
+    if (printMode === OutputMode.ALERT) {
+        alert(result);
+    }
 }
-// const result = writeText('Hello ', 'World!');
-// let isDone = true;
-// printResult(result);
 var results = [];
 buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addEventListener('click', function () {
     console.log('The sum is:');
@@ -23,6 +31,6 @@ buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addE
         }
     };
     results.push(resultsContainer);
-    printResult(results);
-    results[0].print();
+    printResult(result, OutputMode.CONSOLE);
+    printResult(result, OutputMode.ALERT);
 });
