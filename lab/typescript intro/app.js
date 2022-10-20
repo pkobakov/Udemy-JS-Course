@@ -82,3 +82,8 @@ buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addE
     printResult(result, OutputMode.CONSOLE);
     printResult(result, OutputMode.ALERT);
 });
+function longAndEcho(val) {
+    console.log(val);
+    return val;
+}
+longAndEcho('Hi there').split(' ');

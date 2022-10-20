@@ -66,7 +66,7 @@ interface CalculationContainer {
 }
 
 type CalculationResults = CalculationContainer;
-const results: CalculationResults [] = [];
+const results: Array <CalculationResults>  = [];
 
 
 
@@ -87,4 +87,11 @@ buttonElement?.addEventListener('click', () => {
     printResult(result, OutputMode.ALERT);
      
 });
+
+function longAndEcho<T>(val: T) {
+  console.log(val);
+  return val;
+}
+
+longAndEcho<string>('Hi there').split(' ');
 
