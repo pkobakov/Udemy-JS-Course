@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Components</title>
-    <script src="tooltip.js"></script>
+    <script src="tooltip.js" defer></script>
 </head>
 <body>
     <template id="tooltip-template">
-        <span>:)</span>
+    <slot></slot><span> ;)</span>
     </template>
     <p><my-tooltip text="Web Components is a set of standarts">Web Components</my-tooltip> are awesome</p>
     <my-tooltip>Here we go!</my-tooltip>
