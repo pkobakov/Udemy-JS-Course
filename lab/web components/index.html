@@ -5,11 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Components</title>
+    <style>
+        div { border: 2px solid blue; text-align: center; }
+    </style>
     <script src="tooltip.js" defer></script>
 </head>
 <body>
     <template id="tooltip-template"></template>
     <p><my-tooltip text="Web Components is a set of standarts">Web Components</my-tooltip> are awesome</p>
     <my-tooltip>Here we go!</my-tooltip>
+    <div>
+        This does not get the web component styles!
+    </div>
 </body>
 </html>
