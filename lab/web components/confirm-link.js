@@ -1,7 +1,7 @@
 class ConfirmLink extends HTMLAnchorElement {
     connectedCallback() { 
         this.addEventListener('click', event => {
-       if (!confirm('Do you really waint to leave?')) {
+       if (!confirm('Do you really want to leave?')) {
         event.preventDefault();
        }
     }

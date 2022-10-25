@@ -7,13 +7,14 @@
     <title>Web Components</title>
     <style>
         div { border: 2px solid blue; text-align: center; }
+        .highlight { background-color: orchid;}
     </style>
     <script src="tooltip.js" defer></script>
     <script src="confirm-link.js" defer></script>
 </head>
 <body>
     <template id="tooltip-template"></template>
-    <p><my-tooltip text="Web Components is a set of standarts">Web Components</my-tooltip> are awesome</p>
+    <p><my-tooltip text="Web Components is a set of standarts"><span class="highlight">Web Components</span></my-tooltip> are awesome</p>
     <my-tooltip>Here we go!</my-tooltip>
     <div>
         This does not get the web component styles!
