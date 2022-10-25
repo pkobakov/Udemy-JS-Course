@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Components</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         html {
             --color-primary: rgb(146, 200, 218);
+            font-family: sans-serif;
         }
-        div { border: 2px solid blue; text-align: center; }
-        /* .highlight { background-color: orchid;} */
-        my-tooltip {
-            border: 2px solid red;
-            padding: 0.15rem;;
-        }
+
+
     </style>
     <script src="tooltip.js" defer></script>
     <script src="confirm-link.js" defer></script>
@@ -26,10 +26,8 @@
         <span class="highlight">Web Components</span>
       </my-tooltip> are awesome
     </p>
-    <my-tooltip>Here we go!</my-tooltip>
-    <div>
-        This does not get the web component styles!
-    </div>
+    <!-- <my-tooltip>Here we go!</my-tooltip> -->
+    <my-tooltip></my-tooltip>
     <a is="my-confirm-link" href="https://www.google.com">Google</a>
 </body>
 </html>
