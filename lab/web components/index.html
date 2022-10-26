@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,15 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Components</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        html {
-            --color-primary: rgb(146, 200, 218);
-            font-family: sans-serif;
-        }
-
-
+        * { box-sizing: border-box;}
+        html { --color-primary: rgb(146, 200, 218); font-family: sans-serif; }
     </style>
     <script src="tooltip.js" defer></script>
     <script src="confirm-link.js" defer></script>
@@ -26,8 +19,33 @@
         <span class="highlight">Web Components</span>
       </my-tooltip> are awesome
     </p>
-    <!-- <my-tooltip>Here we go!</my-tooltip> -->
+    <my-tooltip>Here we go!</my-tooltip>
     <my-tooltip></my-tooltip>
     <a is="my-confirm-link" href="https://www.google.com">Google</a>
+</body>
+</html> -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Components</title>
+    <script src="modal.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 2rem;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <my-modal></my-modal>
+    <p>Please confirm your choice.</p>
+    <button>Show Details & Confirm</button>
 </body>
 </html>
