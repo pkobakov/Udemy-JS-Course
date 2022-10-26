@@ -64,6 +64,14 @@ class Tooltip extends HTMLElement {
         this.style.position = 'relative';
     };
 
+    attributeChangedCallback(name, oldVal, newVal) {
+        console.log(name, oldVal, newVal);
+    }
+
+    static get observedAttributes () {
+        return ['text'];
+    }
+
     _showTooltip() {
 
         this._tooltipContainer = document.createElement('div');
