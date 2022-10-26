@@ -2,7 +2,7 @@ class Tooltip extends HTMLElement {
     constructor () {
         super();
         this._tooltipIcon;
-        this._tooltipContainer;
+        this._isVisible = false;
         this._tooltipText = 'Some dummy tooltip text';
         this.attachShadow({ mode: 'open'});
        this.shadowRoot.innerHTML = `
@@ -84,20 +84,31 @@ class Tooltip extends HTMLElement {
         this._tooltipIcon.removeEventListener('mouseout', this._hideTooltip);
     } 
 
+    _render() {
+
+        let tooltipContainer = this.shadowRoot.querySelector('div');
+
+        if (this._isVisible) {
+
+        tooltipContainer = document.createElement('div');
+        tooltipContainer.textContent = this._tooltipText;
+        this.shadowRoot.appendChild(tooltipContainer);
+        } else {
+            if (tooltipContainer) {
+                this.shadowRoot.removeChild(tooltipContainer);
+            }
+        }
+    }
+
     _showTooltip() {
-
-        this._tooltipContainer = document.createElement('div');
-        this._tooltipContainer.textContent = this._tooltipText;
-        // this._tooltipContainer.style.backgroundColor = 'black';
-        // this._tooltipContainer.style.color = 'white';
-        // this._tooltipContainer.style.position = 'absolute';
-        // this._tooltipContainer.style.zIndex = '10';
-        this.shadowRoot.appendChild(this._tooltipContainer);
-
+       this._isVisible = true;
+       this._render();
+        
     }
 
     _hideTooltip () {
-        this.shadowRoot.removeChild(this._tooltipContainer);
+      this._isVisible = false;
+      this._render();
     }
 
 }
