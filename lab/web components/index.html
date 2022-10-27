@@ -26,7 +26,12 @@
         const confirmButton = document.querySelector('button');
         const modal = document.querySelector('my-modal');
         confirmButton.addEventListener('click', () => {
-            modal.setAttribute('open', '');
+            // modal.setAttribute('open', '');
+            if (!modal.isOpen) {
+                modal.open();
+                console.log('Opening...');
+                
+            }
         });
     </script>
 </body>
