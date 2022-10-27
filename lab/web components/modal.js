@@ -33,6 +33,12 @@ class ModalComponent extends HTMLElement {
 
           }
 
+          :host([open]) #backdrop,
+          :host([open]) #modal {
+            opacity: 1;
+            poiter-events: all;
+          }
+
           header {
             padding: 1rem;
           }
@@ -75,6 +81,21 @@ class ModalComponent extends HTMLElement {
         </div>
         `;
     }
+
+    // attributeChangedCallback(name, oldValue, newValue) {
+    //   if (name === 'open') {
+    //     if (this.hasAttribute('open')) {
+    //       this.shadowRoot.querySelector('#backdrop').style.opacity = 1;
+    //       this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all';
+    //       this.shadowRoot.querySelector('#modal').style.opacity = 1;
+    //       this.shadowRoot.querySelector('#modal').style.pointerEvents = 'all';
+    //     }
+    //   }
+    // }
+
+    // static get observedAttributes() {
+    //   return ['open'];
+    // }
 }
 
 customElements.define('my-modal', ModalComponent);
