@@ -75,10 +75,9 @@ class ModalComponent extends HTMLElement {
            </section >
 
            <section id="actions">
-             <button>Cancel</button>
-             <button>OK</button>
+             <button id="confirm-btn">OK</button>
+             <button id="cancel-btn">Cancel</button>
            </section>
-
         </div>
         `;
 
@@ -87,7 +86,17 @@ class ModalComponent extends HTMLElement {
         slot.addEventListener('slotchange', () => {
           console.dir(slot.assignedNodes());
 
-        })
+        });
+
+        const confirmBtn = this.shadowRoot.getElementById('confirm-btn');
+        confirmBtn.addEventListener('click', this._confirm.bind(this));
+        const cancelBtn = this.shadowRoot.getElementById('cancel-btn');
+        cancelBtn.addEventListener('click', this._cancel.bind(this));
+        
+
+
+
+
 
     }
 
@@ -110,6 +119,23 @@ class ModalComponent extends HTMLElement {
       this.setAttribute('open', '');
       this.isOpen  = true;
     };
+
+    hide() {
+      if (this.hasAttribute('open')) {
+        
+        this.removeAttribute('open');
+      }
+
+      this.isOpen = false;
+    }
+
+    _cancel() {
+       this.hide();
+    };
+
+    _confirm() {
+       this.hide();
+    }
 
 }
 
