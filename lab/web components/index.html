@@ -1,48 +1,48 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Web Components</title>
-    <script src="modal.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        body {
-            margin: 2rem;
-            font-family: sans-serif;
-        }
+      body {
+        margin: 2rem;
+        font-family: sans-serif;
+      }
     </style>
-</head>
-<body>
+    <script src="modal.js"></script>
+  </head>
+  <body>
     <my-modal>
-        <h1 slot="title">Please Confirm</h1>
-        <p>With your confirmation you agree to pay the amount.</p>
+      <h1 slot="title">Please Confirm</h1>
+      <p>With your confirmation you agree to pay the full amount!</p>
     </my-modal>
     <p>Please confirm your choice.</p>
     <button>Show Details & Confirm</button>
     <script>
-        const confirmButton = document.querySelector('button');
-        const modal = document.querySelector('my-modal');
-        modal.addEventListener('confirm', ()=> {
-            console.log('Confirmed...')
-        });
+      const confirmButton = document.querySelector('button');
+      const modal = document.querySelector('my-modal');
 
-        modal.addEventListener('cancel', () => {
-            console.log('Cancelled...')
-        });
+      modal.addEventListener('confirm', () => {
+        console.log('Confirmed...');
+      });
 
-        confirmButton.addEventListener('click', () => {
-            // modal.setAttribute('open', '');
-            if (!modal.isOpen) {
-                modal.open();
-                console.log('Opening...');
-                
-            }
-        });
+      modal.addEventListener('cancel', () => {
+        console.log('Cancelled...');
+      });
 
+      confirmButton.addEventListener('click', () => {
+        //  modal.setAttribute('opened', '');
+        if (!modal.isOpen) {
+          modal.open();
+          console.log('Opening...');
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
